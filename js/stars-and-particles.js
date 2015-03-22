@@ -1,7 +1,9 @@
 function starsAndParticles() {
+    var starParicles = 1000;
+
     // Starfield
     var stars = new THREE.Geometry();
-    for (var i=0; i<500; i++) {
+    for (var i=0; i<starParicles; i++) {
         stars.vertices.push(new THREE.Vector3(
             1e3 * Math.random() - 5e2,
             1e3 * Math.random() - 5e2,
