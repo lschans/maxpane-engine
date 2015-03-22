@@ -107,6 +107,8 @@ var moveRight = false;
 var prevTime = performance.now();
 var velocity = new THREE.Vector3();
 
+var star_system;
+
 function init() {
 
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -231,21 +233,22 @@ function init() {
 
     }
 
-    /*
     // Starfield
-    var stars = new THREE.SphereGeometry(500,25,25);
-    for (var i=0; i<1000; i++) {
+    var stars = new THREE.Geometry();
+    for (var i=0; i<500; i++) {
         stars.vertices.push(new THREE.Vector3(
             1e3 * Math.random() - 5e2,
             1e3 * Math.random() - 5e2,
-            -1e2 * Math.random() - 5e2
+            1e3 * Math.random() - 5e2
         ));
     }
-    var star_stuff = new THREE.ParticleBasicMaterial();
-    var star_system = new THREE.ParticleSystem(stars, star_stuff);
+    var star_stuff = new THREE.ParticleBasicMaterial({ color: 0x00ff00, blending: THREE.AdditiveBlending, transparent: true});
+    star_system = new THREE.ParticleSystem(stars, star_stuff);
+    star_system.sortParticles = true;
     scene.add(star_system);
-*/
 
+
+    // Far stars
     // create the geometry sphere
     var starSphere  = new THREE.SphereGeometry(1000, 25, 25);
     // create the material, using a texture of startfield
@@ -323,6 +326,13 @@ function animate() {
         prevTime = time;
 
     }
+
+    // add some rotation to the star particle system
+    star_system.rotation.x += Math.round(Math.random() * 10) / 10000;
+    star_system.rotation.y += Math.round(Math.random() * 10) / 10000;
+    //star_system.rotation.z += Math.round(Math.random() * 10) / 10000;
+
+
 
     renderer.render( scene, camera );
     var winResize   = new THREEx.WindowResize(renderer, camera)
