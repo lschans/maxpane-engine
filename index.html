@@ -16,10 +16,17 @@
         <script src="bower_components/threejs/build/three.min.js"></script>
         <script src='bower_components/three-controls/controls/PointerLockControls.js'></script>
 
-        <script src="js/scene-and-controls.js"></script>
-        <script src="js/stars-and-particles.js"></script>
-        <script src="js/jump-cubes.js"></script>
-        <script src="js/animate-and-tick.js"></script>
+        <!-- Load maxpane js -->
+        <script src="js/maxpane.js"></script>
+        <script src="js/maxpaneControls.js"></script>
+        <script src="js/pointerLock.js"></script>
+        <script src="js/raycaster.js"></script>
+        <script src="js/materials.js"></script>
+        <script src="js/surrounding.js"></script>
+        <script src="js/floor.js"></script>
+        <script src="js/positionbar.js"></script>
+        <script src="js/particlestars.js"></script>
+        <script src="js/jumpCubes.js"></script>
 
     </head>
     <body>
@@ -30,12 +37,7 @@
                 (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
             </div>
         </div>
-        <!-- Load final scripts and init the scene -->
-        <script src="js/pointer-lock.js"></script>
-        <script src="js/app.js"></script>
-        <script>
-            init();
-            animate();
-        </script>
+        <!-- Load the pointer lock tester -->
     </body>
+
 </html>
