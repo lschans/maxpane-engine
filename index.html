@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>MAXPANE ENGINE</title>
+        <meta name="description" content="The maxpane game engine">
+        <meta name="author" content="Lars van der Schans">
+
+        <link rel="stylesheet" href="css/main.css">
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <script src="bower_components/threejs/build/three.min.js"></script>
+        <script src='bower_components/threex.windowresize/threex.windowresize.js'></script>
+        <script src='bower_components/three-controls/controls/PointerLockControls.js'></script>
+
+
+    </head>
+
+    <body>
+        <div id="blocker">
+
+            <div id="instructions">
+                <span style="font-size:40px">Click to play</span>
+                <br />
+                (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
+            </div>
+
+        </div>
+        <script src="js/app.js"></script>
+        <script>
+            init();
+            animate();
+
+        </script>
+    </body>
+</html>
