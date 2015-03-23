@@ -87,6 +87,7 @@ function maxpaneAnimate() {
 
 function game(world, tick) {
     var devgame = [
+        character,
         maxpaneControls,
         pointerLock,
         raycaster,

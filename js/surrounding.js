@@ -6,7 +6,7 @@ function surrounding(world, tick, callback) {
 
     // Create mesh with star material
     world.surrounding.mesh  = new THREE.Mesh(world.surrounding.sphere, materials.stars);
-    world.scene.add(world.surrounding.mesh);
+    world.meshes.push(world.surrounding.mesh);
 
     // Return or next
     if(typeof(callback) === 'function') callback(world, tick);

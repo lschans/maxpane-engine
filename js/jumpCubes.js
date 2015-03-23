@@ -10,6 +10,10 @@ function jumpCubes(world, tick, callback) {
         world.jumpCubes.mesh.position.y = Math.floor( Math.random() * 20 ) * 20 + 10;
         world.jumpCubes.mesh.position.z = Math.floor( Math.random() * 20 - 10 ) * 20;
 
+        // Move the whole block of cubes away from the starting point
+        world.jumpCubes.mesh.position.x -= 400;
+        world.jumpCubes.mesh.position.z -= 200;
+
         world.meshes.push( world.jumpCubes.mesh );
 
         // push to objects for collision detection

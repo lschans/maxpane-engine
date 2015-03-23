@@ -74,6 +74,8 @@ function maxpaneControls(world, tick, callback) {
             var time = performance.now();
             var delta = ( time - world.prevTime ) / 1000;
 
+            world.performance = Math.round(delta * 10000);
+
             world.velocity.x -= world.velocity.x * 10.0 * delta;
             world.velocity.z -= world.velocity.z * 10.0 * delta;
 
