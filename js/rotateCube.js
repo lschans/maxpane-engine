@@ -14,8 +14,8 @@ function rotateCube(world, tick, callback) {
     world.rotateCube.outerCube.mesh.position.y = 30;
     world.rotateCube.outerCube.mesh.position.z = -350;
 
-    world.scene.add( world.rotateCube.innerCube.mesh );
-    world.scene.add( world.rotateCube.outerCube.mesh );
+    world.meshes.push(world.rotateCube.innerCube.mesh);
+    world.meshes.push(world.rotateCube.outerCube.mesh);
 
     tick.push(function(world){
         // add some rotation to the cube

@@ -15,7 +15,8 @@ function particlestars(world, tick, callback) {
 
     world.particlestars.particlesystem = new THREE.ParticleSystem(world.particlestars.stars, materials.particlestars);
     world.particlestars.particlesystem.sortParticles = true;
-    world.scene.add(world.particlestars.particlesystem);
+
+    world.meshes.push(world.particlestars.particlesystem);
 
     tick.push(function(world){
         // add some rotation to the star particle system

@@ -10,7 +10,7 @@ function jumpCubes(world, tick, callback) {
         world.jumpCubes.mesh.position.y = Math.floor( Math.random() * 20 ) * 20 + 10;
         world.jumpCubes.mesh.position.z = Math.floor( Math.random() * 20 - 10 ) * 20;
 
-        world.scene.add( world.jumpCubes.mesh );
+        world.meshes.push( world.jumpCubes.mesh );
 
         // push to objects for collision detection
         world.objects.push( world.jumpCubes.mesh );

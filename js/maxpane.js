@@ -51,6 +51,7 @@ function worldInit(){
     world.prevTime = performance.now();
     world.velocity = new THREE.Vector3();
     world.objects = [];
+    world.meshes = [];
 
     window.addEventListener( 'resize', onWindowResize, true );
 }
@@ -64,6 +65,10 @@ function onWindowResize() {
 }
 
 function maxpaneRender(world, tick) {
+    world.meshes.map(function(mesh){
+        world.scene.add(mesh);
+    });
+
     document.body.appendChild( world.renderer.domElement );
     maxpaneWorld = world;
     maxpaneTick = tick;
@@ -72,7 +77,6 @@ function maxpaneRender(world, tick) {
 
 function maxpaneAnimate() {
     requestAnimationFrame( maxpaneAnimate );
-
     // Run tick code here
     maxpaneTick.map( function(tickFunction) {
         tickFunction(maxpaneWorld);

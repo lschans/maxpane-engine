@@ -8,7 +8,6 @@ function floor(world, tick, callback) {
     world.floor.layerTop.geometry = new THREE.PlaneBufferGeometry( 4000, 4000, 50, 50 );
     world.floor.layerTop.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
     world.floor.layerTop.mesh = new THREE.Mesh( world.floor.layerTop.geometry, materials.greenWireThick );
-    world.scene.add( world.floor.layerTop.mesh );
 
     // Top layer of the floor, the one that is solid black
     world.floor.layerBottom.geometry = new THREE.PlaneBufferGeometry( 4000, 4000, 100, 100 );
@@ -17,7 +16,8 @@ function floor(world, tick, callback) {
 
     // Place the solid floor a tiny bit under the normal floor
     world.floor.layerBottom.mesh.position.z -= 1;
-    world.scene.add( world.floor.layerBottom.mesh );
+    world.meshes.push( world.floor.layerBottom.mesh );
+    world.meshes.push( world.floor.layerTop.mesh );
 
     // Return or next
     if(typeof(callback) === 'function') callback(world, tick);
