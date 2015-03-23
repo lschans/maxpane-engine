@@ -87,7 +87,7 @@ function maxpaneControls(world, tick, callback) {
 
 
 
-            // Cube object code
+            // Collision detection, make top of objects 'solid'
             var intersections = world.raycaster.intersectObjects( world.objects );
             var isOnObject = intersections.length > 0;
             if ( isOnObject === true ) {

@@ -45,7 +45,6 @@ function worldInit(){
     world.renderer.setClearColor( 0x000000 );
     world.renderer.setPixelRatio( window.devicePixelRatio );
     world.renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( world.renderer.domElement );
 
     world.loader = new THREE.JSONLoader(); // init the loader util
 
@@ -65,6 +64,7 @@ function onWindowResize() {
 }
 
 function maxpaneRender(world, tick) {
+    document.body.appendChild( world.renderer.domElement );
     maxpaneWorld = world;
     maxpaneTick = tick;
     maxpaneAnimate();
@@ -90,6 +90,7 @@ function game(world, tick) {
         surrounding,
         particlestars,
         jumpCubes,
+        rotateCube,
         positionbar,
         maxpaneRender
     ];
