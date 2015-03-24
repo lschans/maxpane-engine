@@ -2,7 +2,7 @@ function jumpCubes(world, tick, callback) {
     world.jumpCubes = {};
     world.jumpCubes.geometry = new THREE.BoxGeometry( 20, 20, 20 );
 
-    for ( var i = 0; i < 500; i++ ) {
+    for ( var i = 0; i < 250; i++ ) {
         world.jumpCubes.mesh = new THREE.Mesh( world.jumpCubes.geometry, materials.jumpCube );
 
         // Place at random positions

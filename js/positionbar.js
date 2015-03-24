@@ -19,7 +19,10 @@ function positionbar(world, tick, callback) {
             ')  Position ( x: ' + Math.round(world.controls.getObject().position.x) +
             ' y: ' + Math.round(world.controls.getObject().position.y) +
             ' z: ' + Math.round(world.controls.getObject().position.z) +
-            ')  Performance : ' + world.performance;
+            ')  Performance : ' + Math.round(world.performance / 10) +
+            ' - Char rotation x: ' + Math.round(world.controls.getObject().rotation.x * 100) +
+            ' y: ' + Math.round(world.controls.getObject().rotation.y * 100) +
+            ' z: ' + Math.round(world.controls.getObject().rotation.z * 100);
 
     });
 

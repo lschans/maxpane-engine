@@ -3,7 +3,7 @@ function raycaster(world, tick, callback) {
 
     tick.push(function(world){
         world.raycaster.ray.origin.copy( world.controls.getObject().position );
-        world.raycaster.ray.origin.y -= 10;
+        world.raycaster.ray.origin.y += 7;
     });
 
     // Return or next

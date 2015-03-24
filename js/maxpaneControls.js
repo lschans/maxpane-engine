@@ -1,5 +1,6 @@
 function maxpaneControls(world, tick, callback) {
-    world.controls = new THREE.PointerLockControls(world.camera);
+    //world.controls = new THREE.PointerLockControls(world.camera);
+    world.controls = new THREE.PointerLockControls(world.character.mesh);
     world.scene.add(world.controls.getObject());
 
     world.controlsEnabled = true;
@@ -87,8 +88,6 @@ function maxpaneControls(world, tick, callback) {
             if ( world.moveLeft ) world.velocity.x -= 400.0 * delta;
             if ( world.moveRight ) world.velocity.x += 400.0 * delta;
 
-
-
             // Collision detection, make top of objects 'solid'
             var intersections = world.raycaster.intersectObjects( world.objects );
             var isOnObject = intersections.length > 0;
@@ -101,13 +100,12 @@ function maxpaneControls(world, tick, callback) {
             world.controls.getObject().translateY( world.velocity.y * delta );
             world.controls.getObject().translateZ( world.velocity.z * delta );
 
-            if ( world.controls.getObject().position.y < 10 ) {
+            if ( world.controls.getObject().position.y < 0 ) {
 
                 world.velocity.y = 0;
-                world.controls.getObject().position.y = 10;
+                world.controls.getObject().position.y = 0;
 
                 world.canJump = true;
-
             }
 
             world.prevTime = time;

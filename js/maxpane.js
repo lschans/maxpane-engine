@@ -37,6 +37,9 @@ function worldInit(){
         settings.camera.near,
         settings.camera.far );
 
+    world.camera.useQuaternion = true;
+    world.camera.position.set(0, 20, 0);
+
     // Add scene
     world.scene = new THREE.Scene();
 
