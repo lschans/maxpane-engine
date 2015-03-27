@@ -94,20 +94,22 @@ function maxpaneControls(world, tick, callback) {
             world.controls.objRotation.z = 0 - Math.round(world.controls.getObject().rotation.z * 100);
 
             var time = performance.now();
-            var delta = ( time - world.prevTime ) / 1000;
+            var deltaX = ( time - world.prevTime ) / 1000;
+            var deltaY = ( time - world.prevTime ) / 1000;
+            var deltaZ = ( time - world.prevTime ) / 1000;
 
-            world.performance = Math.round(delta * 10000);
+            world.performance = Math.round(((deltaX + deltaY + deltaZ) / 3) * 10000);
 
-            world.velocity.x -= world.velocity.x * 10.0 * delta;
-            world.velocity.z -= world.velocity.z * 10.0 * delta;
+            world.velocity.x -= world.velocity.x * 10.0 * deltaX;
+            world.velocity.z -= world.velocity.z * 10.0 * deltaZ;
 
-            world.velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+            world.velocity.y -= 9.8 * 100.0 * deltaY; // 100.0 = mass
 
-            if ( world.moveForward ) world.velocity.z -= 400.0 * delta;
-            if ( world.moveBackward ) world.velocity.z += 400.0 * delta;
+            if ( world.moveForward ) world.velocity.z -= 600.0 * deltaZ;
+            if ( world.moveBackward ) world.velocity.z += 600.0 * deltaZ;
 
-            if ( world.moveLeft ) world.velocity.x -= 400.0 * delta;
-            if ( world.moveRight ) world.velocity.x += 400.0 * delta;
+            if ( world.moveLeft ) world.velocity.x -= 600.0 * deltaX;
+            if ( world.moveRight ) world.velocity.x += 600.0 * deltaX;
 
             // Collision detection, make top of objects 'solid'
             var intersections = world.raycaster.intersectObjects( world.objects );
@@ -117,9 +119,9 @@ function maxpaneControls(world, tick, callback) {
                 world.canJump = true;
             }
 
-            world.controls.getObject().translateX( world.velocity.x * delta );
-            world.controls.getObject().translateY( world.velocity.y * delta );
-            world.controls.getObject().translateZ( world.velocity.z * delta );
+            world.controls.getObject().translateX( world.velocity.x * deltaX );
+            world.controls.getObject().translateY( world.velocity.y * deltaY );
+            world.controls.getObject().translateZ( world.velocity.z * deltaZ );
 
             if ( world.controls.getObject().position.y < 0 ) {
 
