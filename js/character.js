@@ -23,7 +23,7 @@ function character(world, tick, callback) {
     world.character.bodyOuter = {};
 
     world.character.bodyInner.geometry = new THREE.SphereGeometry( 3, 10, 10 );
-    world.character.bodyInner.mesh = new THREE.Mesh( world.character.bodyInner.geometry, materials.redWireThin );
+    world.character.bodyInner.mesh = new THREE.Mesh( world.character.bodyInner.geometry, materials.redCharSolid );
     world.character.bodyInner.mesh.velocity =  new THREE.Vector3(0, 0, 0);
     world.character.bodyInner.mesh.position.y = 0;
     world.character.bodyInner.mesh.position.z = 0;
