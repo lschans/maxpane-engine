@@ -22,6 +22,8 @@ materials.blackSolid = new THREE.MeshBasicMaterial( { color: 0x000000, transpare
 materials.redCharSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.7, side:THREE.DoubleSide })
 materials.greenCharSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.7, side:THREE.DoubleSide })
 materials.blueCharSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.7, side:THREE.DoubleSide })
+materials.blueCharConeSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.9, side:THREE.DoubleSide })
+materials.greenCharDomeSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.9, side:THREE.DoubleSide })
 
 
 // Star material
