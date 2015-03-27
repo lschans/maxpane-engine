@@ -12,6 +12,10 @@ function positionbar(world, tick, callback) {
     document.body.insertBefore(world.devpositionbar,document.body.firstChild);
 
     tick.push(function(world){
+
+        var zAngle = Math.round(world.controls.getObject().rotation.z * 100) % 630;
+        if(zAngle < 0) zAngle = 0 - zAngle;
+
         world.devpositionbar.innerHTML =
             'Velocity (x:' + Math.round(world.velocity.x) +
             ' y: ' + Math.round(world.velocity.y) +
@@ -20,9 +24,9 @@ function positionbar(world, tick, callback) {
             ' y: ' + Math.round(world.controls.getObject().position.y) +
             ' z: ' + Math.round(world.controls.getObject().position.z) +
             ')  Performance : ' + Math.round(world.performance / 10) +
-            ' - Char rotation x: ' + Math.round(world.controls.getObject().rotation.x * 100) +
-            ' y: ' + Math.round(world.controls.getObject().rotation.y * 100) +
-            ' z: ' + Math.round(world.controls.getObject().rotation.z * 100);
+            ' - Char rotation x: ' + world.controls.objRotation.x +
+            ' y: ' + world.controls.objRotation.y +
+            ' z: ' + world.controls.objRotation.z;
 
     });
 

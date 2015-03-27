@@ -1,6 +1,8 @@
 function maxpaneControls(world, tick, callback) {
-    //world.controls = new THREE.PointerLockControls(world.camera);
-    world.controls = new THREE.PointerLockControls(world.character.mesh);
+
+    // Has some nastyness to bind the character here... should be in the character or set as global
+    world.controls = new THREE.PointerLockControls(world.character.bodyInner.mesh);
+
     world.scene.add(world.controls.getObject());
 
     world.controlsEnabled = true;
@@ -9,6 +11,11 @@ function maxpaneControls(world, tick, callback) {
     world.moveBackward = false;
     world.moveLeft = false;
     world.moveRight = false;
+
+    world.controls.objRotation = {};
+    world.controls.objRotation.x = 0;
+    world.controls.objRotation.y = 0;
+    world.controls.objRotation.z = 0;
 
     // Nasty to use the maxpaneWorld but we need the globals
     var onKeyDown = function (event) {
@@ -71,6 +78,20 @@ function maxpaneControls(world, tick, callback) {
 
     tick.push(function(world){
         if ( world.controlsEnabled ) {
+
+            if(world.controls.getObject().rotation.x < -6.29) world.controls.getObject().rotation.x = 0;
+            if(world.controls.getObject().rotation.x > 0) world.controls.getObject().rotation.x = -6.29;
+
+            if(world.controls.getObject().rotation.y < -6.29) world.controls.getObject().rotation.y = 0;
+            if(world.controls.getObject().rotation.y > 0) world.controls.getObject().rotation.y = -6.29;
+
+            if(world.controls.getObject().rotation.z < -6.29) world.controls.getObject().rotation.z = 0;
+            if(world.controls.getObject().rotation.z > 0) world.controls.getObject().rotation.z = -6.29;
+
+
+            world.controls.objRotation.x = 0 - Math.round(world.controls.getObject().rotation.x * 100);
+            world.controls.objRotation.y = 0 - Math.round(world.controls.getObject().rotation.y * 100);
+            world.controls.objRotation.z = 0 - Math.round(world.controls.getObject().rotation.z * 100);
 
             var time = performance.now();
             var delta = ( time - world.prevTime ) / 1000;
