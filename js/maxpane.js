@@ -6,7 +6,7 @@ var settings = {},
     maxpaneTick;
 
 settings.camera = {};
-settings.camera.fov = 75;
+settings.camera.fov = 60;
 settings.camera.width = window.innerWidth;
 settings.camera.height = window.innerHeight;
 settings.camera.near = 1;
@@ -99,6 +99,7 @@ function game(world, tick) {
         particlestars,
         jumpCubes,
         rotateCube,
+        rutgerMod,
         positionbar,
         maxpaneRender
     ];
