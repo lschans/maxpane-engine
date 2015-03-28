@@ -70,6 +70,8 @@ function character(world, tick, callback) {
     world.meshes.push(world.character.bodyConeInner.mesh);
     world.meshes.push(world.character.bodyConeOuter.mesh);
 
+    // Change the controls over to character, this way we rely on control but non intrusive
+    world.controls = new THREE.PointerLockControls(world.character.bodyInner.mesh);
 
     tick.push(function(world){
         // Move the character and use innerbody for positioning and stuff

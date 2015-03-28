@@ -1,7 +1,7 @@
 function maxpaneControls(world, tick, callback) {
 
-    // Has some nastyness to bind the character here... should be in the character or set as global
-    world.controls = new THREE.PointerLockControls(world.character.bodyInner.mesh);
+    // If no other module has taken over the controls, set controls to camera ( fpv )
+    if(typeof(world.controls) === 'undefined') world.controls = new THREE.PointerLockControls(world.camera);
 
     world.scene.add(world.controls.getObject());
 

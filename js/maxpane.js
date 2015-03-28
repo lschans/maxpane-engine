@@ -90,7 +90,9 @@ function maxpaneAnimate() {
 
 function game(world, tick) {
     var devgame = [
-        character,
+        audio,
+        bgMusic,
+        //character,
         maxpaneControls,
         pointerLock,
         raycaster,
