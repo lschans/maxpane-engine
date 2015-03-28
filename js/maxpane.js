@@ -92,7 +92,7 @@ function game(world, tick) {
     var devgame = [
         audio,
         bgMusic,
-        //character,
+        character,
         maxpaneControls,
         pointerLock,
         raycaster,
