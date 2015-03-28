@@ -73,7 +73,8 @@ function character(world, tick, callback) {
     // Change the controls over to character, this way we rely on control but non intrusive
     world.controls = new THREE.PointerLockControls(world.character.bodyInner.mesh);
 
-    tick.push(function(world){
+    tick.push(function(world) {
+
         // Move the character and use innerbody for positioning and stuff
         world.character.bodyInner.mesh.velocity.x = (world.velocity.x);
         world.character.bodyInner.mesh.velocity.y = (world.velocity.y);
@@ -177,6 +178,9 @@ function character(world, tick, callback) {
         world.camera.position.y = world.character.bodyInner.mesh.position.y + 15;
         world.camera.position.z = cameraOffset.z;
         world.camera.lookAt( world.character.bodyInner.mesh.position );
+
+        world.character.bodyConeOuter.mesh.rotation.y += ( world.velocity.y / 500);
+        if(world.character.bodyConeOuter.mesh.rotation.y >= Math.PI / 4) world.character.bodyConeOuter.mesh.rotation.y = 0;
     });
 
     // Return or next

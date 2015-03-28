@@ -45,6 +45,7 @@ function worldInit(){
 
     // Add renderer
     world.renderer = new THREE.WebGLRenderer();
+    world.renderer.antialias = true; // True looks pretty but makes the gpu explode, so turns off at to much load
     world.renderer.setClearColor( 0x000000 );
     world.renderer.setPixelRatio( window.devicePixelRatio );
     world.renderer.setSize( window.innerWidth, window.innerHeight );
