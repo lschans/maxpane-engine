@@ -30,6 +30,8 @@ function particlestars(world, tick, callback) {
             world.particlestars.slowCount++;
             if(world.particlestars.slowCount > 100) {
                 world.particlestars.enabled = false;
+                // Turn aa also of
+                world.renderer.antialias = false;
                 world.scene.remove(world.particlestars.particlesystem);
             }
         }

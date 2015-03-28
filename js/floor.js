@@ -7,7 +7,7 @@ function floor(world, tick, callback) {
     // Top layer of the floor, the one with the wireframe
     world.floor.layerTop.geometry = new THREE.PlaneBufferGeometry( 4000, 4000, 50, 50 );
     world.floor.layerTop.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
-    world.floor.layerTop.mesh = new THREE.Mesh( world.floor.layerTop.geometry, materials.redWireThin );
+    world.floor.layerTop.mesh = new THREE.Mesh( world.floor.layerTop.geometry, materials.greenFloorThin );
     //world.floor.layerTop.mesh.rotation.x = Math.PI /2;
 
     // Top layer of the floor, the one that is solid black
