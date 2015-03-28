@@ -46,6 +46,10 @@ function maxpaneControls(world, tick, callback) {
                 maxpaneWorld.canJump = false;
                 break;
 
+
+            case 48: // 0
+                world.audio.lineOut.toggleMute()
+                break;
         }
     };
 
