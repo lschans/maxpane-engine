@@ -5,7 +5,7 @@ function maxpaneControls(world, tick, callback) {
 
     world.scene.add(world.controls.getObject());
 
-    world.controlsEnabled = true;
+    world.controlsEnabled = false;
     world.canJump = true;
     world.moveForward = false;
     world.moveBackward = false;
@@ -45,6 +45,7 @@ function maxpaneControls(world, tick, callback) {
                 if (maxpaneWorld.canJump === true) maxpaneWorld.velocity.y += 350;
                 maxpaneWorld.canJump = false;
                 break;
+
         }
     };
 
