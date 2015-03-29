@@ -6,7 +6,7 @@ var settings = {},
     maxpaneTick;
 
 settings.camera = {};
-settings.camera.fov = 60;
+settings.camera.fov = 75;
 settings.camera.width = window.innerWidth;
 settings.camera.height = window.innerHeight;
 settings.camera.near = 1;
@@ -79,9 +79,17 @@ function maxpaneRender(world, tick) {
     maxpaneAnimate();
 }
 
+var d = new Date();
+var lastTimeMsec = null;
 function maxpaneAnimate() {
-    requestAnimationFrame( maxpaneAnimate );
-    // Run tick code here
+    requestAnimationFrame( maxpaneAnimate )
+
+    // measure time and time delta
+    maxpaneWorld.nowMsec = d.getMilliseconds();
+    lastTimeMsec = lastTimeMsec || maxpaneWorld.nowMsec-1000/60;
+    maxpaneWorld.deltaMsec	= Math.min(200, maxpaneWorld.nowMsec - lastTimeMsec);
+    lastTimeMsec = maxpaneWorld.nowMsec;
+
     maxpaneTick.map( function(tickFunction) {
         tickFunction(maxpaneWorld);
     })
@@ -104,6 +112,7 @@ function game(world, tick) {
         rotateCube,
         rutgerMod,
         positionbar,
+        soundMachine,
         maxpaneRender
     ];
     syncIt (world, tick, devgame);
