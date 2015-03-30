@@ -82,7 +82,7 @@ function maxpaneRender(world, tick) {
 var d = new Date();
 var lastTimeMsec = null;
 function maxpaneAnimate() {
-    requestAnimationFrame( maxpaneAnimate )
+    requestAnimationFrame( maxpaneAnimate );
 
     // measure time and time delta
     maxpaneWorld.nowMsec = d.getMilliseconds();
@@ -92,7 +92,7 @@ function maxpaneAnimate() {
 
     maxpaneTick.map( function(tickFunction) {
         tickFunction(maxpaneWorld);
-    })
+    });
 
     maxpaneWorld.renderer.render( maxpaneWorld.scene, maxpaneWorld.camera );
 }
@@ -121,4 +121,4 @@ function game(world, tick) {
 window.onload = function () {
     worldInit();
     game(world, tick);
-}
+};

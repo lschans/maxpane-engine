@@ -28,11 +28,11 @@ function pointerLock(world, tick, callback) {
 
                 instructions.style.display = '';
             }
-        }
+        };
 
         var pointerlockerror = function ( event ) {
             instructions.style.display = '';
-        }
+        };
 
         // Hook pointer lock state change events
         document.addEventListener( 'pointerlockchange', pointerlockchange, false );
@@ -62,7 +62,7 @@ function pointerLock(world, tick, callback) {
                         element.requestPointerLock();
                     }
 
-                }
+                };
 
                 document.addEventListener( 'fullscreenchange', fullscreenchange, false );
                 document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );

@@ -1,11 +1,11 @@
 function bgMusic(world, tick, callback) {
     WebAudiox.loadBuffer.onLoad	= function(context, url){
-        console.log('url loaded', url)
-        console.log('nb sound remaining', WebAudiox.loadBuffer.inProgressCount)
+        console.log('url loaded', url);
+        console.log('nb sound remaining', WebAudiox.loadBuffer.inProgressCount);
         if( WebAudiox.loadBuffer.inProgressCount === 0 ){
-            console.log('all sounds loaded')
+            console.log('all sounds loaded');
         }
-    }
+    };
 
     // load a sound and play it immediatly
     WebAudiox.loadBuffer(world.audio.context, 'music/marbles.ogg', function(buffer){

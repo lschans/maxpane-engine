@@ -23,10 +23,10 @@ function particlestars(world, tick, callback) {
     tick.push(function(world){
         // add some rotation to the star particle system
         // remove the particle system if the machine can't handle it
-        if(world.performance < 500 && world.particlestars.enabled == true) {
+        if(world.performance < 500 && world.particlestars.enabled === true) {
             world.particlestars.particlesystem.rotation.x += Math.round(Math.random() * 10) / 10000;
             world.particlestars.particlesystem.rotation.y += Math.round(Math.random() * 10) / 10000;
-        } else if(world.particlestars.enabled == true) {
+        } else if(world.particlestars.enabled === true) {
             world.particlestars.slowCount++;
             if(world.particlestars.slowCount > 100) {
                 world.particlestars.enabled = false;
