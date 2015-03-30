@@ -108,7 +108,7 @@ function maxpaneControls(world, tick, callback) {
             world.velocity.x -= world.velocity.x * 10.0 * deltaX;
             world.velocity.z -= world.velocity.z * 10.0 * deltaZ;
 
-            world.velocity.y -= 9.8 * 100.0 * deltaY; // 100.0 = mass
+            world.velocity.y -= 9.81 * 100.0 * deltaY; // 100.0 = mass
 
             if ( world.moveForward ) world.velocity.z -= 600.0 * deltaZ;
             if ( world.moveBackward ) world.velocity.z += 600.0 * deltaZ;

@@ -37,8 +37,12 @@ function worldInit(){
         settings.camera.near,
         settings.camera.far );
 
-    world.camera.useQuaternion = true;
     world.camera.position.set(0, 20, 0);
+
+    // Create virtual physics world
+    world.worldx = new THREEx.CannonWorld().start();
+
+    world.worldx.world.addContactMaterial(physMaterials.stone);
 
     // Add scene
     world.scene = new THREE.Scene();
@@ -102,7 +106,7 @@ function game(world, tick) {
         cannonworld,
         audio,
         bgMusic,
-        //character,
+        character,
         maxpaneControls,
         pointerLock,
         raycaster,

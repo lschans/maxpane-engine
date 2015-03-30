@@ -3,15 +3,15 @@ var THREEx = THREEx || {}
 THREEx.CannonWorld	= function(){
 	// physics world init
 	var world	= new CANNON.World()
-        world.gravity.set(0,-9.81,0);
+        world.gravity.set(0,-9.81 * 10.0, 0);
         world.broadphase = new CANNON.NaiveBroadphase();
 	
-	// var solver = new CANNON.GSSolver();
-	// // world.defaultContactMaterial.contactEquationStiffness = 1e9;
-	// // world.defaultContactMaterial.contactEquationRegularizationTime = 10;
-	// solver.iterations	= 30;
-	// solver.tolerance	= 0.01;
-	// world.solver		= new CANNON.SplitSolver(solver);
+	var solver = new CANNON.GSSolver();
+	world.defaultContactMaterial.contactEquationStiffness = 1e9;
+	world.defaultContactMaterial.contactEquationRegularizationTime = 10;
+	solver.iterations	= 30;
+	solver.tolerance	= 0.01;
+	world.solver		= new CANNON.SplitSolver(solver);
 
 
 	// world.solver.iterations = 30
