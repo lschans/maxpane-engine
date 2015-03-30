@@ -7,6 +7,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
+var obfuscate = require('gulp-obfuscate');
 
 // Lint Task
 gulp.task('lint', function() {
@@ -23,6 +24,9 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('build'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
+        .pipe(gulp.dest('build'))
+        .pipe(rename('all.obfuscate.js'))
+        .pipe(obfuscate({ replaceMethod: obfuscate.ZALGO }))
         .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('build'));
 });

@@ -17,7 +17,7 @@ function floor(world, tick, callback) {
 
     // Place the solid floor a tiny bit under the normal floor
     world.floor.layerBottom.mesh.position.z -= 1;
-    world.meshes.push( world.floor.layerBottom.mesh );
+    //world.meshes.push( world.floor.layerBottom.mesh );
     world.meshes.push( world.floor.layerTop.mesh );
 
     // Return or next

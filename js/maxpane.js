@@ -99,9 +99,10 @@ function maxpaneAnimate() {
 
 function game(world, tick) {
     var devgame = [
+        cannonworld,
         audio,
         bgMusic,
-        character,
+        //character,
         maxpaneControls,
         pointerLock,
         raycaster,
