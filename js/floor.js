@@ -26,10 +26,6 @@ function floor(world, tick, callback) {
     world.floor.groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),-Math.PI/2);
     world.physWorld.add(world.floor.groundBody);
 
-    tick.push(function(world){
-        //world.floor.layerTop.bodyx.update(world.deltaMsec/1000, world.nowMsec/1000);
-    });
-
     world.meshes.push( world.floor.layerBottom.mesh );
     world.meshes.push( world.floor.layerTop.mesh );
 

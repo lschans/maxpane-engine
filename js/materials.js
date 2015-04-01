@@ -33,6 +33,8 @@ materials.greenCharDomeSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, tr
 
 // Stitched planks material
 materials.redPlankSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
+materials.greenPlankSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
+materials.bluePlankSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
 
 
 // Star material

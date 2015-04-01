@@ -3,6 +3,11 @@ function stitchedPlanks(world, tick, callback) {
     world.stitchedPlanks = {};
     world.stitchedPlanks.boxes = [];
     world.stitchedPlanks.boxMeshes = [];
+    world.stitchedPlanks.materials = [];
+
+    world.stitchedPlanks.materials[0] = materials.redPlankSolid;
+    world.stitchedPlanks.materials[1] = materials.greenPlankSolid;
+    world.stitchedPlanks.materials[2] = materials.bluePlankSolid;
 
     // Add linked world.stitchedPlanks.boxes
     world.stitchedPlanks.size = 3;
@@ -19,8 +24,8 @@ function stitchedPlanks(world, tick, callback) {
             var last;
             var boxbody = new CANNON.Body({mass: world.stitchedPlanks.mass});
             boxbody.addShape(world.stitchedPlanks.boxShape);
-            var boxMesh = new THREE.Mesh(world.stitchedPlanks.boxGeometry, materials.redPlankSolid);
-            boxbody.position.set(x, (N - i) * (world.stitchedPlanks.size * 2 + 2 * world.stitchedPlanks.space) + world.stitchedPlanks.size * 1 + world.stitchedPlanks.space, z);
+            var boxMesh = new THREE.Mesh(world.stitchedPlanks.boxGeometry, world.stitchedPlanks.materials[Math.floor(Math.random() * (2 - 0 + 1))]);
+            boxbody.position.set(x, (N - i) * (world.stitchedPlanks.size * 2 + 2 * world.stitchedPlanks.space) + world.stitchedPlanks.space, z);
             boxbody.linearDamping = 0.03;
             boxbody.angularDamping = 0.01;
             boxMesh.castShadow = false;
@@ -43,11 +48,27 @@ function stitchedPlanks(world, tick, callback) {
         }
     };
 
+    world.stitchedPlanks.addBox = function(width, height, depth, x, y, z) {
+        var halfExtends = new CANNON.Vec3(width, height, depth);
+        var physBox = new CANNON.Body({ mass: 0 });
+        var boxShape = new CANNON.Box(halfExtends);
+        physBox.addShape(boxShape);
+        var boxGeometry = new THREE.BoxGeometry(width, height, depth);
+        var boxMesh = new THREE.Mesh(boxGeometry, materials.redPlankSolid);
+        physBox.position.set(x, y, z);
+        boxMesh.position.set(x, y, z);
+        world.physWorld.add(physBox);
+        world.scene.add(boxMesh);
+    };
+
+    world.stitchedPlanks.addBox(5, 45, 5, 2, 22.5, -100);
+    world.stitchedPlanks.addBox(52, 5, 5, 26, 42.5, -100);
     world.stitchedPlanks.addStrip(5,10,-100);
     world.stitchedPlanks.addStrip(5,18,-100);
     world.stitchedPlanks.addStrip(5,26,-100);
     world.stitchedPlanks.addStrip(5,34,-100);
     world.stitchedPlanks.addStrip(5,42,-100);
+    world.stitchedPlanks.addBox(5, 45, 5, 50, 22.5, -100);
 
     tick.push(function(world){
         // Update box positions

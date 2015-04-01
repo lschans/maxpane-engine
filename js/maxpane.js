@@ -83,7 +83,7 @@ function worldInit(){
 
     // Create a sphere to simulate the player physics
     world.player = {};
-    world.player.mass = 2;
+    world.player.mass = 8;
     world.player.radius = 5;
     world.player.sphereShape = new CANNON.Sphere(world.player.radius);
     world.player.sphereBody = new CANNON.Body({ mass: world.player.mass });
