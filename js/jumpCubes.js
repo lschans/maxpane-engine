@@ -1,5 +1,62 @@
 function jumpCubes(world, tick, callback) {
     world.jumpCubes = {};
+/*
+    MP.add.box(world, {
+        width:10,
+        height:10,
+        depth:300,
+        x:10,
+        y:5,
+        z:10,
+        mass:0,
+        material:new THREE.MeshBasicMaterial({ color: 0xaaaaaa})
+    });
+*/
+
+    // Add cage
+    MP.add.box(world, {
+        width: 480,
+        height: 50,
+        depth: 2,
+        x: 150,
+        y: 25,
+        z: -500,
+        mass: 0,
+        material: materials.glassWall
+    });
+
+    MP.add.box(world, {
+        width: 480,
+        height: 50,
+        depth: 2,
+        x: 150,
+        y: 25,
+        z: -1000,
+        mass: 0,
+        material: materials.glassWall
+    });
+
+    MP.add.box(world, {
+        width: 2,
+        height: 50,
+        depth: 480,
+        x: 400,
+        y: 25,
+        z: -750,
+        mass: 0,
+        material: materials.glassWall
+    });
+
+    MP.add.box(world, {
+        width: 2,
+        height: 50,
+        depth: 480,
+        x: -100,
+        y: 25,
+        z: -750,
+        mass: 0,
+        material: materials.glassWall
+    });
 
     world.jumpCubes.halfExtends = new CANNON.Vec3(10,10,10);
     world.jumpCubes.boxShape = new CANNON.Box(world.jumpCubes.halfExtends);
@@ -14,8 +71,8 @@ function jumpCubes(world, tick, callback) {
         var z = Math.floor( Math.random() * 20 - 10 ) * 20;
 
         // Move the whole block of cubes away from the starting point
-        x -= 400;
-        z -= 200;
+        x += 150;
+        z -= 750;
 
         var boxBody = new CANNON.Body({ mass: 0 });
         boxBody.addShape(world.jumpCubes.boxShape);

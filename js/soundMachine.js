@@ -2,12 +2,58 @@ function soundMachine(world, tick, callback) {
     world.soundMachine = {};
     world.soundMachine.machineCone = {};
 
+    // Add cage
+    MP.add.box(world, {
+        width: 280,
+        height: 50,
+        depth: 2,
+        x: 650,
+        y: 25,
+        z: -100,
+        mass: 0,
+        material: materials.glassWall
+    });
+
+    MP.add.box(world, {
+        width: 280,
+        height: 50,
+        depth: 2,
+        x: 650,
+        y: 25,
+        z: 200,
+        mass: 0,
+        material: materials.glassWall
+    });
+
+    MP.add.box(world, {
+        width: 2,
+        height: 50,
+        depth: 280,
+        x: 800,
+        y: 25,
+        z: 50,
+        mass: 0,
+        material: materials.glassWall
+    });
+
+    MP.add.box(world, {
+        width: 2,
+        height: 50,
+        depth: 280,
+        x: 500,
+        y: 25,
+        z: 50,
+        mass: 0,
+        material: materials.glassWall
+    });
+
+
     // radiusAtTop, radiusAtBottom, height, segmentsAroundRadius, segmentsAlongHeight
     world.soundMachine.machineCone.geometry = new THREE.CylinderGeometry( 1, 5, 25, 16, 3 );
     world.soundMachine.machineCone.mesh = new THREE.Mesh( world.soundMachine.machineCone.geometry, materials.greenWireThin );
-    world.soundMachine.machineCone.mesh.position.x = 200;
+    world.soundMachine.machineCone.mesh.position.x = 650;
     world.soundMachine.machineCone.mesh.position.y = 15;
-    world.soundMachine.machineCone.mesh.position.z = -200;
+    world.soundMachine.machineCone.mesh.position.z = 50;
 
     world.meshes.push(world.soundMachine.machineCone.mesh);
 

@@ -9,7 +9,7 @@ settings.camera = {};
 settings.camera.fov = 75;
 settings.camera.width = window.innerWidth;
 settings.camera.height = window.innerHeight;
-settings.camera.near = 0.1;
+settings.camera.near = 0.01;
 settings.camera.far = 2500;
 
 settings.gravityX = 0;
@@ -72,7 +72,7 @@ function worldInit(){
         slipperyMaterial,
         slipperyMaterial,
         0.0, // friction coefficient
-        0.3  // restitution
+        0.1  // restitution
     );
     
     // We must add the contact materials to the world
@@ -83,7 +83,7 @@ function worldInit(){
 
     // Create a sphere to simulate the player physics
     world.player = {};
-    world.player.mass = 8;
+    world.player.mass = 5;
     world.player.radius = 5;
     world.player.sphereShape = new CANNON.Sphere(world.player.radius);
     world.player.sphereBody = new CANNON.Body({ mass: world.player.mass });
@@ -180,9 +180,9 @@ function game(world, tick) {
         surrounding,
         particlestars,
         jumpCubes,
-        rotateCube,
+        //rotateCube,
         positionbar,
-        rutgerMod,
+        //rutgerMod,
         shooter,
         movableBoxes,
         stitchedPlanks,

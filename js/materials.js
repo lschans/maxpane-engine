@@ -36,6 +36,9 @@ materials.redPlankSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transpa
 materials.greenPlankSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
 materials.bluePlankSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
 
+// Wall material
+materials.glassWall = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.4, side:THREE.DoubleSide });
+
 
 // Star material
 materials.stars  = new THREE.MeshBasicMaterial();
@@ -43,7 +46,7 @@ materials.stars.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield.pn
 materials.stars.side  = THREE.BackSide;
 
 // Particle stars material
-materials.particlestars = new THREE.ParticleBasicMaterial({ color: 0x00ff00, blending: THREE.AdditiveBlending, transparent: true});
+materials.particlestars = new THREE.PointCloudMaterial({ color: 0x00ff00, blending: THREE.AdditiveBlending, transparent: true, size:1});
 
 // Jump cubes material, define all faces to have the top face solid
 materials.jumpCube = new THREE.MeshFaceMaterial([

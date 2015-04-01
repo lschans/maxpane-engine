@@ -15,7 +15,7 @@ function particlestars(world, tick, callback) {
         ));
     }
 
-    world.particlestars.particlesystem = new THREE.ParticleSystem(world.particlestars.stars, materials.particlestars);
+    world.particlestars.particlesystem = new THREE.PointCloud(world.particlestars.stars, materials.particlestars);
     world.particlestars.particlesystem.sortParticles = true;
 
     world.meshes.push(world.particlestars.particlesystem);
