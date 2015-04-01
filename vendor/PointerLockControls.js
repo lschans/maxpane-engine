@@ -185,8 +185,8 @@
         if(yawObject.rotation.z < -6.29) yawObject.rotation.z = 0;
         if(yawObject.rotation.z > 0) yawObject.rotation.z = -6.29;
 
-        cannonBody.rotation.x = yawObject.rotation.x * 100;
-        cannonBody.rotation.y = yawObject.rotation.y * 100;
-        cannonBody.rotation.z = yawObject.rotation.z * 100;
+        cannonBody.rotation.x = 0 - (yawObject.rotation.x * 100);
+        cannonBody.rotation.y = 0 - (yawObject.rotation.y * 100);
+        cannonBody.rotation.z = 0 - (yawObject.rotation.z * 100);
     };
 };

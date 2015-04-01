@@ -125,6 +125,17 @@ function onWindowResize() {
     world.renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
+
+var stats = new Stats();
+stats.setMode(0);  // 0: fps, 1: ms
+
+function maxpaneStats() {
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+    document.body.appendChild( stats.domElement );
+}
+
 function maxpaneRender(world, tick) {
     world.meshes.map(function(mesh){
         world.scene.add(mesh);
@@ -142,7 +153,7 @@ var time = Date.now();
 
 function maxpaneAnimate() {
     requestAnimationFrame( maxpaneAnimate );
-
+    stats.begin();
     // measure time and time delta
     maxpaneWorld.nowMsec = d.getMilliseconds();
     lastTimeMsec = lastTimeMsec || maxpaneWorld.nowMsec-1000/60;
@@ -155,6 +166,7 @@ function maxpaneAnimate() {
 
     maxpaneWorld.renderer.render( maxpaneWorld.scene, maxpaneWorld.camera );
     time = Date.now();
+    stats.end();
 }
 
 function game(world, tick) {
@@ -177,6 +189,7 @@ function game(world, tick) {
         maxpaneRender
     ];
     syncIt (world, tick, devgame);
+    maxpaneStats();
 }
 
 window.onload = function () {

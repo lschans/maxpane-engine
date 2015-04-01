@@ -13,28 +13,34 @@ function shooter(world, tick, callback) {
     world.shooter.getShootDir = function(targetVec, world){
         targetVec.set(0,0,1);
         targetVec.unproject(world.camera);
-        var ray = new THREE.Ray(world.player.sphereBody.position, targetVec.sub(world.player.sphereBody.position).normalize() );
+        var ray = new THREE.Ray(world.player.sphereBody.position, targetVec.sub(world.player.sphereBody.position).normalize());
         targetVec.copy(ray.direction);
         return targetVec;
-    }
+    };
 
     world.shooter.shoot = function(world){
-        if(world.controlsEnabled==true){
+        if(world.controlsEnabled===true){
             var shootDirection = new THREE.Vector3();
             var ballBody = new CANNON.Body({ mass: 3 });
             ballBody.addShape(world.shooter.ballShape);
             var ballMesh = new THREE.Mesh( world.shooter.ballGeometry, materials.greenAmmo );
             world.physWorld.add(ballBody);
             world.scene.add(ballMesh);
-            setTimeout(function(){
-                world.physWorld.remove(ballBody);
-                world.scene.remove(ballMesh);
-            }, 10000);
 
             ballMesh.castShadow = false;
             ballMesh.receiveShadow = false;
-            world.shooter.balls.push(ballBody);
-            world.shooter.ballMeshes.push(ballMesh);
+            var ballBodyID = world.shooter.balls.push(ballBody) -1;
+            var ballMeshID =  world.shooter.ballMeshes.push(ballMesh) - 1;
+
+            // Remove ball after 10 seconds
+            setTimeout(function(){
+                world.physWorld.remove(ballBody);
+                world.scene.remove(ballMesh);
+                delete world.shooter.ballMeshes[ballMeshID];
+                delete world.shooter.balls[ballBodyID];
+                console.log('Remove:' + ballMeshID + '  ' + ballBodyID);
+            }, 10000);
+
             shootDirection = world.shooter.getShootDir(shootDirection, world);
             ballBody.velocity.set(  shootDirection.x * world.shooter.shootVelo,
                 shootDirection.y * world.shooter.shootVelo,
@@ -53,9 +59,17 @@ function shooter(world, tick, callback) {
 
     tick.push(function(world){
         // Update ball positions
+        var actCount = 0;
         for(var i=0; i<world.shooter.balls.length; i++){
-            world.shooter.ballMeshes[i].position.copy(world.shooter.balls[i].position);
-            world.shooter.ballMeshes[i].quaternion.copy(world.shooter.balls[i].quaternion);
+            if(typeof(world.shooter.balls[i]) !== 'undefined') {
+                actCount++;
+                world.shooter.ballMeshes[i].position.copy(world.shooter.balls[i].position);
+                world.shooter.ballMeshes[i].quaternion.copy(world.shooter.balls[i].quaternion);
+            }
+        }
+        if(actCount === 0 && world.shooter.balls.length !== 0) {
+            world.shooter.ballMeshes = [];
+            world.shooter.balls = [];
         }
     });
 

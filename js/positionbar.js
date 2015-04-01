@@ -19,6 +19,9 @@ function positionbar(world, tick, callback) {
             ') Rotation ( x: ' + Math.round(world.player.sphereBody.rotation.x) +
             ' y: ' + Math.round(world.player.sphereBody.rotation.y) +
             ' z: ' + Math.round(world.player.sphereBody.rotation.z) +
+            ') Velocity ( x: ' + Math.round(world.player.sphereBody.velocity.x) +
+            ' y: ' + Math.round(world.player.sphereBody.velocity.y) +
+            ' z: ' + Math.round(world.player.sphereBody.velocity.z) +
             ')';
     });
 
