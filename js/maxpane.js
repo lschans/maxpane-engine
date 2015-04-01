@@ -9,8 +9,12 @@ settings.camera = {};
 settings.camera.fov = 75;
 settings.camera.width = window.innerWidth;
 settings.camera.height = window.innerHeight;
-settings.camera.near = 1;
+settings.camera.near = 0.1;
 settings.camera.far = 2500;
+
+settings.gravityX = 0;
+settings.gravityY = -9.8 * 50; // Looks odd, but its a game.. and this feels 'real' for the level.
+settings.gravityZ = 0;
 
 function syncItter (world, tick){
     // Function that iterates over a given array with callback functions
@@ -40,9 +44,57 @@ function worldInit(){
     world.camera.position.set(0, 20, 0);
 
     // Create virtual physics world
-    world.worldx = new THREEx.CannonWorld().start();
+    world.physWorld = new CANNON.World();
+    world.physWorld.quatNormalizeSkip = 0;
+    world.physWorld.quatNormalizeFast = false;
 
-    world.worldx.world.addContactMaterial(physMaterials.stone);
+    world.solver = new CANNON.GSSolver();
+
+    world.physWorld.defaultContactMaterial.contactEquationStiffness = 1e9;
+    world.physWorld.defaultContactMaterial.contactEquationRelaxation = 4;
+
+    world.solver.iterations = 7;
+    world.solver.tolerance = 0.1;
+
+    world.split = true;
+
+    if(world.split) {
+        world.physWorld.solver = new CANNON.SplitSolver(world.solver);
+    } else {
+        world.physWorld.solver = world.solver;
+    }
+
+    var physMaterials = {};
+
+    // Create a slippery material (friction coefficient = 0.0)
+    var slipperyMaterial = new CANNON.Material("slipperyMaterial");
+    var slipperyContactMaterial = new CANNON.ContactMaterial(
+        slipperyMaterial,
+        slipperyMaterial,
+        0.0, // friction coefficient
+        0.3  // restitution
+    );
+    
+    // We must add the contact materials to the world
+    world.physWorld.addContactMaterial(slipperyContactMaterial);
+
+    world.physWorld.gravity.set(settings.gravityX,settings.gravityY,settings.gravityZ);
+    world.physWorld.broadphase = new CANNON.NaiveBroadphase();
+
+    // Create a sphere to simulate the player physics
+    world.player = {};
+    world.player.mass = 5;
+    world.player.radius = 1.3;
+    world.player.sphereShape = new CANNON.Sphere(world.player.radius);
+    world.player.sphereBody = new CANNON.Body({ mass: world.player.mass });
+    world.player.sphereBody.addShape(world.player.sphereShape);
+    world.player.sphereBody.position.set(0,20,0);
+    world.player.sphereBody.rotation = {
+        x:0.0,
+        y:0.0,
+        z:0.0};
+    world.player.sphereBody.linearDamping = 0.9;
+    world.physWorld.add(world.player.sphereBody);
 
     // Add scene
     world.scene = new THREE.Scene();
@@ -50,6 +102,8 @@ function worldInit(){
     // Add renderer
     world.renderer = new THREE.WebGLRenderer();
     world.renderer.antialias = true; // True looks pretty but makes the gpu explode, so turns off at to much load
+    world.renderer.shadowMapEnabled = false;
+    world.renderer.shadowMapSoft = false;
     world.renderer.setClearColor( 0x000000 );
     world.renderer.setPixelRatio( window.devicePixelRatio );
     world.renderer.setSize( window.innerWidth, window.innerHeight );
@@ -63,7 +117,6 @@ function worldInit(){
 
     window.addEventListener( 'resize', onWindowResize, true );
 }
-
 
 function onWindowResize() {
     world.camera.aspect = window.innerWidth / window.innerHeight;
@@ -85,6 +138,8 @@ function maxpaneRender(world, tick) {
 
 var d = new Date();
 var lastTimeMsec = null;
+var time = Date.now();
+
 function maxpaneAnimate() {
     requestAnimationFrame( maxpaneAnimate );
 
@@ -99,24 +154,25 @@ function maxpaneAnimate() {
     });
 
     maxpaneWorld.renderer.render( maxpaneWorld.scene, maxpaneWorld.camera );
+    time = Date.now();
 }
 
 function game(world, tick) {
     var devgame = [
-        cannonworld,
         audio,
         bgMusic,
-        character,
-        maxpaneControls,
+        //character,
         pointerLock,
-        raycaster,
+        maxpaneControls,
         floor,
         surrounding,
         particlestars,
         jumpCubes,
         rotateCube,
-        rutgerMod,
         positionbar,
+        rutgerMod,
+        shooter,
+        movableBoxes,
         soundMachine,
         maxpaneRender
     ];

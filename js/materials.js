@@ -15,6 +15,8 @@ materials.blueWireThin = new THREE.MeshBasicMaterial( { color: 0x0000ff, wirefra
 //Floor materials
 materials.greenFloorThin = new THREE.MeshBasicMaterial( { color: 0x009900, wireframe: true, wireframeLinewidth: 1, transparent:false } );
 
+// Ammo materials
+materials.greenAmmo = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, transparent: true, opacity: 0.8 } );
 
 // Solid materials
 materials.redHalfSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.5, side:THREE.DoubleSide });
