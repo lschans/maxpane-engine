@@ -7,7 +7,7 @@
 
     var eyeYPos = 20; // eyes are 2 meters above the ground
     var velocityFactor = 3;
-    var jumpVelocity = 380;
+    var jumpVelocity = 300;
     var scope = this;
 
     var pitchObject = new THREE.Object3D();

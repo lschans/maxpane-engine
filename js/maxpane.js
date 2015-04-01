@@ -51,10 +51,10 @@ function worldInit(){
     world.solver = new CANNON.GSSolver();
 
     world.physWorld.defaultContactMaterial.contactEquationStiffness = 1e9;
-    world.physWorld.defaultContactMaterial.contactEquationRelaxation = 4;
+    world.physWorld.defaultContactMaterial.contactEquationRelaxation = 5;
 
-    world.solver.iterations = 7;
-    world.solver.tolerance = 0.1;
+    world.solver.iterations = 10;
+    world.solver.tolerance = 0.0001;
 
     world.split = true;
 
@@ -83,8 +83,8 @@ function worldInit(){
 
     // Create a sphere to simulate the player physics
     world.player = {};
-    world.player.mass = 5;
-    world.player.radius = 1.3;
+    world.player.mass = 2;
+    world.player.radius = 5;
     world.player.sphereShape = new CANNON.Sphere(world.player.radius);
     world.player.sphereBody = new CANNON.Body({ mass: world.player.mass });
     world.player.sphereBody.addShape(world.player.sphereShape);
@@ -185,6 +185,7 @@ function game(world, tick) {
         rutgerMod,
         shooter,
         movableBoxes,
+        stitchedPlanks,
         soundMachine,
         maxpaneRender
     ];

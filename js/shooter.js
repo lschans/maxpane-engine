@@ -5,7 +5,7 @@ function shooter(world, tick, callback) {
     world.shooter.ballShape = new CANNON.Sphere(3.5);
     world.shooter.ballGeometry = new THREE.SphereGeometry(world.shooter.ballShape.radius, 10, 10);
     shootDirection = new THREE.Vector3();
-    world.shooter.shootVelo = 1500;
+    world.shooter.shootVelo = 500;
 
     world.shooter.balls = [];
     world.shooter.ballMeshes = [];
@@ -21,7 +21,7 @@ function shooter(world, tick, callback) {
     world.shooter.shoot = function(world){
         if(world.controlsEnabled===true){
             var shootDirection = new THREE.Vector3();
-            var ballBody = new CANNON.Body({ mass: 3 });
+            var ballBody = new CANNON.Body({ mass: 4 });
             ballBody.addShape(world.shooter.ballShape);
             var ballMesh = new THREE.Mesh( world.shooter.ballGeometry, materials.greenAmmo );
             world.physWorld.add(ballBody);
@@ -38,7 +38,6 @@ function shooter(world, tick, callback) {
                 world.scene.remove(ballMesh);
                 delete world.shooter.ballMeshes[ballMeshID];
                 delete world.shooter.balls[ballBodyID];
-                console.log('Remove:' + ballMeshID + '  ' + ballBodyID);
             }, 10000);
 
             shootDirection = world.shooter.getShootDir(shootDirection, world);
