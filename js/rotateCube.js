@@ -4,23 +4,55 @@ function rotateCube(world, tick, callback) {
     world.rotateCube.innerCube = {};
     world.rotateCube.outerCube = {};
 
-    world.rotateCube.innerCube.geometry = new THREE.BoxGeometry( 20, 20, 20 );
-    world.rotateCube.innerCube.mesh = new THREE.Mesh( world.rotateCube.innerCube.geometry, materials.greenWireThick );
-    world.rotateCube.innerCube.mesh.position.y = 30;
-    world.rotateCube.innerCube.mesh.position.z = -350;
+    // Mind you can't place 2 physics objects inside of each other
+    // So if there is an object inside of another, the inner object should be 'normal'
 
-    world.rotateCube.outerCube.geometry = new THREE.BoxGeometry( 40, 40, 40 );
-    world.rotateCube.outerCube.mesh = new THREE.Mesh( world.rotateCube.outerCube.geometry, materials.redWireThick );
-    world.rotateCube.outerCube.mesh.position.y = 30;
-    world.rotateCube.outerCube.mesh.position.z = -350;
+    world.rotateCube.innerCube = MP.add.box(world, tick, {
+        width:20,
+        height:20,
+        depth:20,
+        x:0,
+        y:30,
+        z:-350,
+        mass:0,
+        material:materials.greenWireThick,
+        nonPhysMovement:true,
+        update:true,
+        hasPhys:false
+    });
 
-    world.meshes.push(world.rotateCube.innerCube.mesh);
-    world.meshes.push(world.rotateCube.outerCube.mesh);
+    world.rotateCube.outerCube = MP.add.box(world, tick, {
+        width:40,
+        height:40,
+        depth:40,
+        x:0,
+        y:30,
+        z:-350,
+        mass:0,
+        material:materials.redWireThick,
+        nonPhysMovement:true,
+        update:true,
+        hasPhys:true
+    });
+
+    MP.add.sphere(world, tick, {
+        radius:20,
+        widthSegments:15,
+        heightSegments:15,
+        x:0,
+        y:60,
+        z:-150,
+        mass:0.001,
+        material:materials.whiteWireThin,
+        update:true
+    });
+
+    console.log(world.rotateCube.outerCube.body);
 
     tick.push(function(world){
         // add some rotation to the cube
         world.rotateCube.innerCube.mesh.rotation.y -= 0.02;
-        world.rotateCube.outerCube.mesh.rotation.y += 0.01;
+        world.rotateCube.outerCube.body.rotation.y += 0.01;
     });
 
     // Return or next

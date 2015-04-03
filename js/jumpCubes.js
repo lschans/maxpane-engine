@@ -1,20 +1,8 @@
 function jumpCubes(world, tick, callback) {
     world.jumpCubes = {};
-/*
-    MP.add.box(world, {
-        width:10,
-        height:10,
-        depth:300,
-        x:10,
-        y:5,
-        z:10,
-        mass:0,
-        material:new THREE.MeshBasicMaterial({ color: 0xaaaaaa})
-    });
-*/
 
     // Add cage
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 480,
         height: 50,
         depth: 2,
@@ -25,7 +13,7 @@ function jumpCubes(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 480,
         height: 50,
         depth: 2,
@@ -36,7 +24,7 @@ function jumpCubes(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 2,
         height: 50,
         depth: 480,
@@ -47,7 +35,7 @@ function jumpCubes(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 2,
         height: 50,
         depth: 480,
@@ -77,8 +65,8 @@ function jumpCubes(world, tick, callback) {
         var boxBody = new CANNON.Body({ mass: 0 });
         boxBody.addShape(world.jumpCubes.boxShape);
         var boxMesh = new THREE.Mesh( world.jumpCubes.boxGeometry, materials.jumpCube );
-        world.physWorld.add(boxBody);
-        world.scene.add(boxMesh);
+        world.bodies.push(boxBody);
+        world.meshes.push(boxMesh);
         boxBody.position.set(x,y,z);
         boxMesh.position.set(x,y,z);
         boxMesh.castShadow = false;

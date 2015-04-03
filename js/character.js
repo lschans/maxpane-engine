@@ -26,11 +26,18 @@ function character(world, tick, callback) {
     world.character.bodyTorusLow = {};
     world.character.bodyDome = {};
 
+
+
+
     world.character.bodyInner.geometry = new THREE.SphereGeometry( 3, 10, 10 );
     world.character.bodyInner.mesh = new THREE.Mesh( world.character.bodyInner.geometry, materials.redCharSolid );
     world.character.bodyInner.mesh.velocity =  new THREE.Vector3(0, 0, 0);
     world.character.bodyInner.mesh.position.y = 0;
     world.character.bodyInner.mesh.position.z = 0;
+
+
+
+
 
     world.character.bodyOuter.geometry = new THREE.SphereGeometry( 4, 10, 10 );
     world.character.bodyOuter.mesh = new THREE.Mesh( world.character.bodyOuter.geometry, materials.greenWireThin );
@@ -71,7 +78,9 @@ function character(world, tick, callback) {
     world.meshes.push(world.character.bodyConeOuter.mesh);
 
     // Change the controls over to character, this way we rely on control but non intrusive
-    world.controls = new THREE.PointerLockControls(world.character.bodyInner.mesh);
+    world.controls = new PointerLockControls(world.camera, world.character.bodyInner.mesh);
+
+
 
     tick.push(function(world) {
 
@@ -115,8 +124,8 @@ function character(world, tick, callback) {
         var stepZ = (world.character.bodyInner.mesh.velocity.z / delta) / quadrant;
         var stepX = (world.character.bodyInner.mesh.velocity.x / delta) / quadrant;
 
-        if(world.controls.objRotation.y >= 0 && world.controls.objRotation.y <= quadrant) {
-            rotation = world.controls.objRotation.y;
+        if(world.player.sphereBody.rotation.y >= 0 && world.player.sphereBody.rotation.y <= quadrant) {
+            rotation = world.player.sphereBody.rotation.y;
             rotationInvert = quadrant - rotation;
 
             // Forward / backward
@@ -128,8 +137,8 @@ function character(world, tick, callback) {
             rotateAroundWorldAxis(world.character.bodyOuter.mesh, zAxis, 0 - (rotationInvert * stepX));
         }
 
-        if(world.controls.objRotation.y > quadrant && world.controls.objRotation.y <= (quadrant * 2)) {
-            rotation = world.controls.objRotation.y - quadrant;
+        if(world.player.sphereBody.rotation.y > quadrant && world.player.sphereBody.rotation.y <= (quadrant * 2)) {
+            rotation = world.player.sphereBody.rotation.y - quadrant;
             rotationInvert = quadrant - rotation;
 
             // Forward / backward
@@ -141,8 +150,8 @@ function character(world, tick, callback) {
             rotateAroundWorldAxis(world.character.bodyOuter.mesh, zAxis, (rotation * stepX));
         }
 
-        if(world.controls.objRotation.y > (quadrant * 2) && world.controls.objRotation.y <= (quadrant * 3)) {
-            rotation = world.controls.objRotation.y - (quadrant * 2);
+        if(world.player.sphereBody.rotation.y > (quadrant * 2) && world.player.sphereBody.rotation.y <= (quadrant * 3)) {
+            rotation = world.player.sphereBody.rotation.y - (quadrant * 2);
             rotationInvert = quadrant - rotation;
 
             // Forward / backward
@@ -154,8 +163,8 @@ function character(world, tick, callback) {
             rotateAroundWorldAxis(world.character.bodyOuter.mesh, zAxis, (rotationInvert * stepX));
         }
 
-        if(world.controls.objRotation.y > (quadrant * 3) && world.controls.objRotation.y <= (quadrant * 4)) {
-            rotation = world.controls.objRotation.y - (quadrant * 3);
+        if(world.player.sphereBody.rotation.y > (quadrant * 3) && world.player.sphereBody.rotation.y <= (quadrant * 4)) {
+            rotation = world.player.sphereBody.rotation.y - (quadrant * 3);
             rotationInvert = quadrant - rotation;
 
             // Forward / backward
@@ -167,7 +176,7 @@ function character(world, tick, callback) {
             rotateAroundWorldAxis(world.character.bodyOuter.mesh, zAxis, 0 - (rotation * stepX));
         }
 
-        // world.controls.objRotation.x
+        // world.player.sphereBody.rotation.x
 
         var dynOffsetZ = 40 - (Math.round(world.velocity.z) / 8);
 

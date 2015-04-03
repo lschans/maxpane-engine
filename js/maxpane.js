@@ -9,7 +9,7 @@ settings.camera = {};
 settings.camera.fov = 75;
 settings.camera.width = window.innerWidth;
 settings.camera.height = window.innerHeight;
-settings.camera.near = 0.01;
+settings.camera.near = 2;
 settings.camera.far = 2500;
 
 settings.gravityX = 0;
@@ -53,8 +53,8 @@ function worldInit(){
     world.physWorld.defaultContactMaterial.contactEquationStiffness = 1e9;
     world.physWorld.defaultContactMaterial.contactEquationRelaxation = 5;
 
-    world.solver.iterations = 10;
-    world.solver.tolerance = 0.0001;
+    world.solver.iterations = 15;
+    world.solver.tolerance = 0.01;
 
     world.split = true;
 
@@ -114,6 +114,7 @@ function worldInit(){
     world.velocity = new THREE.Vector3();
     world.objects = [];
     world.meshes = [];
+    world.bodies = [];
 
     window.addEventListener( 'resize', onWindowResize, true );
 }
@@ -137,6 +138,10 @@ function maxpaneStats() {
 }
 
 function maxpaneRender(world, tick) {
+    world.bodies.map(function(body) {
+        world.physWorld.add(body);
+    });
+
     world.meshes.map(function(mesh){
         world.scene.add(mesh);
     });
@@ -180,7 +185,7 @@ function game(world, tick) {
         surrounding,
         particlestars,
         jumpCubes,
-        //rotateCube,
+        rotateCube,
         positionbar,
         //rutgerMod,
         shooter,

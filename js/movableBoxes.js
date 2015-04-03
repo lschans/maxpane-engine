@@ -3,7 +3,7 @@ function movableBoxes(world, tick, callback) {
     world.movableBoxes = {};
 
     // Add cage
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 300,
         height: 50,
         depth: 2,
@@ -14,7 +14,7 @@ function movableBoxes(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 300,
         height: 50,
         depth: 2,
@@ -25,7 +25,7 @@ function movableBoxes(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 2,
         height: 50,
         depth: 300,
@@ -36,7 +36,7 @@ function movableBoxes(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 2,
         height: 50,
         depth: 125,
@@ -47,7 +47,7 @@ function movableBoxes(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 2,
         height: 50,
         depth: 125,

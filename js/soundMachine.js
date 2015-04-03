@@ -3,7 +3,7 @@ function soundMachine(world, tick, callback) {
     world.soundMachine.machineCone = {};
 
     // Add cage
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 280,
         height: 50,
         depth: 2,
@@ -14,7 +14,7 @@ function soundMachine(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 280,
         height: 50,
         depth: 2,
@@ -25,7 +25,7 @@ function soundMachine(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 2,
         height: 50,
         depth: 280,
@@ -36,7 +36,7 @@ function soundMachine(world, tick, callback) {
         material: materials.glassWall
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width: 2,
         height: 50,
         depth: 280,

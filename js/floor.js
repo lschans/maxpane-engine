@@ -17,7 +17,7 @@ function floor(world, tick, callback) {
     world.floor.layerBottom.mesh = new THREE.Mesh( world.floor.layerBottom.geometry, materials.blackSolid );
 
     // Place the solid floor a tiny bit under the normal floor
-    world.floor.layerBottom.mesh.position.y -= 0.1;
+    world.floor.layerBottom.mesh.position.y -= 1;
 
     // The physical floor
     world.floor.groundShape = new CANNON.Plane();

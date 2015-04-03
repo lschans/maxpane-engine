@@ -61,7 +61,7 @@ function stitchedPlanks(world, tick, callback) {
 
     // x: 495 z: -370
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width:5,
         height:40,
         depth:5,
@@ -72,7 +72,7 @@ function stitchedPlanks(world, tick, callback) {
         material:materials.redPlankSolid
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width:5,
         height:10,
         depth:55,
@@ -83,7 +83,7 @@ function stitchedPlanks(world, tick, callback) {
         material:materials.redPlankSolid
     });
 
-    MP.add.box(world, {
+    MP.add.box(world, tick, {
         width:5,
         height:40,
         depth:5,
