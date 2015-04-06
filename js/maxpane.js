@@ -35,6 +35,10 @@ function syncIt (world, tick, functionArray) {
 
 function worldInit(){
     // Add camera
+    world.objects = [];
+    world.meshes = [];
+    world.bodies = [];
+
     world.camera = new THREE.PerspectiveCamera(
         settings.camera.fov,
         settings.camera.width / settings.camera.height,
@@ -53,8 +57,8 @@ function worldInit(){
     world.physWorld.defaultContactMaterial.contactEquationStiffness = 1e9;
     world.physWorld.defaultContactMaterial.contactEquationRelaxation = 5;
 
-    world.solver.iterations = 15;
-    world.solver.tolerance = 0.01;
+    world.solver.iterations = 25;
+    world.solver.tolerance = 0.001;
 
     world.split = true;
 
@@ -101,6 +105,10 @@ function worldInit(){
 
     // Add renderer
     world.renderer = new THREE.WebGLRenderer();
+
+    // Fallback renderer for clients without webGL.. 8fps.. so not really an option
+    //world.renderer = new THREE.CanvasRenderer();
+
     world.renderer.antialias = true; // True looks pretty but makes the gpu explode, so turns off at to much load
     world.renderer.shadowMapEnabled = false;
     world.renderer.shadowMapSoft = false;
@@ -111,10 +119,9 @@ function worldInit(){
     world.loader = new THREE.JSONLoader(); // init the loader util
 
     world.prevTime = performance.now();
+
+    // World velocity is probably outdated since we have physics
     world.velocity = new THREE.Vector3();
-    world.objects = [];
-    world.meshes = [];
-    world.bodies = [];
 
     window.addEventListener( 'resize', onWindowResize, true );
 }
@@ -125,7 +132,6 @@ function onWindowResize() {
 
     world.renderer.setSize( window.innerWidth, window.innerHeight );
 }
-
 
 var stats = new Stats();
 stats.setMode(0);  // 0: fps, 1: ms

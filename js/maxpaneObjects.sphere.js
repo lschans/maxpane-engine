@@ -19,6 +19,7 @@ MP.add.sphere = function(world, tick, sphereObject) {
     var ballGeometry = new THREE.SphereGeometry(ballShape.radius, sphereObject.widthSegments, sphereObject.heightSegments);
     var ballBody = new CANNON.Body({ mass:sphereObject.mass });
     ballBody.addShape(ballShape);
+    ballBody.linearDamping = sphereObject.damping;
     var ballMesh = new THREE.Mesh( ballGeometry, sphereObject.material );
     world.bodies.push(ballBody);
     world.meshes.push(ballMesh);

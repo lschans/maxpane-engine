@@ -47,7 +47,7 @@ MP.add.configTest = function(object) {
     if(typeof(object.update) == 'undefined') object.update=false;
     if(typeof(object.nonPhysMovement) == 'undefined') object.nonPhysMovement=false;
     if(typeof(object.hasPhys) == 'undefined') object.hasPhys=true;
+    if(typeof(object.damping) == 'undefined') object.damping=0.9;
+
     return object;
 }
-
-

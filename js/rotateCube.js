@@ -44,6 +44,7 @@ function rotateCube(world, tick, callback) {
         z:-150,
         mass:0.001,
         material:materials.whiteWireThin,
+        damping:0.001,
         update:true
     });
 

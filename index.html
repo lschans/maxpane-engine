@@ -17,6 +17,12 @@
 
         <!-- build:js -->
         <script src="bower_components/threejs/build/three.js"></script>
+
+        <!-- Libs needed for software rendering fallback... 8fps so we might not support fallback -->
+        <script src="bower_components/threejs/examples/js/renderers/CanvasRenderer.js"></script>
+        <script src="bower_components/threejs/examples/js/renderers/Projector.js"></script>
+
+
         <script src="bower_components/threejs/examples/js/libs/stats.min.js"></script>
         <script src="bower_components/cannon.js/build/cannon.js"></script>
         <script src='js/maxpaneObjects.js'></script>

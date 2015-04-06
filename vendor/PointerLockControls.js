@@ -6,7 +6,7 @@
  var PointerLockControls = function ( camera, cannonBody ) {
 
     var eyeYPos = 20; // eyes are 2 meters above the ground
-    var velocityFactor = 3;
+    var velocityFactor = 4;
     var jumpVelocity = 300;
     var scope = this;
 

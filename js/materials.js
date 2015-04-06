@@ -46,6 +46,10 @@ materials.stars  = new THREE.MeshBasicMaterial();
 materials.stars.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield.png');
 materials.stars.side  = THREE.BackSide;
 
+materials.starsAlpha  = new THREE.MeshBasicMaterial({ transparent: true});
+materials.starsAlpha.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield_alpha.png');
+materials.starsAlpha.side  = THREE.BackSide;
+
 // Particle stars material
 materials.particlestars = new THREE.PointCloudMaterial({ color: 0x00ff00, blending: THREE.AdditiveBlending, transparent: true, size:1});
 
