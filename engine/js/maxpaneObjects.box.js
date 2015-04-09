@@ -14,11 +14,14 @@
 MP.add.box = function(world, tick, boxObject) {
     boxObject = MP.add.configTest(boxObject);
 
+    var boxBody = {};
+    var boxMesh = {};
+
     // Add physics object if objects has physics
     if(boxObject.hasPhys) {
         var cannonVector = new CANNON.Vec3(boxObject.width / 2, boxObject.height / 2, boxObject.depth / 2);
         var cannonBox = new CANNON.Box(cannonVector);
-        var boxBody = new CANNON.Body({mass: boxObject.mass});
+        boxBody = new CANNON.Body({mass: boxObject.mass});
         boxBody.addShape(cannonBox);
         world.bodies.push(boxBody);
 
@@ -29,7 +32,7 @@ MP.add.box = function(world, tick, boxObject) {
 
     // Add the visual box
     var boxGeometry = new THREE.BoxGeometry(boxObject.width, boxObject.height, boxObject.depth, boxObject.widthSegments, boxObject.heightSegments, boxObject.depthSegments);
-    var boxMesh = new THREE.Mesh(boxGeometry, boxObject.material);
+    boxMesh = new THREE.Mesh(boxGeometry, boxObject.material);
     world.meshes.push(boxMesh);
     boxMesh.position.set(boxObject.x, boxObject.y, boxObject.z);
 

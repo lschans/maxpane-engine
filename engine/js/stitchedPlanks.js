@@ -36,7 +36,7 @@ function stitchedPlanks(world, tick, callback) {
             world.stitchedPlanks.boxes.push(boxbody);
             world.stitchedPlanks.boxMeshes.push(boxMesh);
 
-            if (i != 0) {
+            if (i !== 0) {
                 // Connect this body to the last one
                 var c1 = new CANNON.PointToPointConstraint(
                     boxbody,

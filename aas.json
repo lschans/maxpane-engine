@@ -1,0 +1,140 @@
+{
+  "id": "maxpane",
+  "scripts" : {
+    "build" : "npm script line here",
+    "test"  : "test script here"
+  },
+  "default":"game.maxpane.nl",
+  "AAS" :[
+    {
+      "domain":"www.maxpane.nl",
+      "forceHTTPS"  : false,
+      "index"       : "index.html",
+      "roots":{
+        "authenticated": "/Users/lschans/Projects/maxpane-engine/webroot",
+        "unauthenticated": "/Users/lschans/Projects/maxpane-engine/loginroot",
+        "common": "/Users/lschans/Projects/maxpane-engine/public"
+      },
+      "modules" : {
+        "GET":[
+          "worker.parseRequest.getGet",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "POST":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "PUT":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "DELETE":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "OPTIONS":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "HEAD":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "TRACE":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "CONNECT":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "PATCH":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "UNDEFINED":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ]
+      }
+    },
+    {
+      "domain":"game.maxpane.nl",
+      "forceHTTPS"  : false,
+      "index"       : "index.html",
+      "roots":{
+        "authenticated": "/Users/lschans/Projects/maxpane-engine/engine",
+        "unauthenticated": "/Users/lschans/Projects/maxpane-engine/loginroot",
+        "common": "/Users/lschans/Projects/maxpane-engine/public"
+      },
+      "modules" : {
+        "GET":[
+          "worker.parseRequest.getGet",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ],
+        "UNDEFINED":[
+          "worker.parseRequest.getPost",
+          "worker.cookies.parseCookies",
+          "worker.session.initSession",
+          "worker.authenticate.authenticate",
+          "worker.clientInfo.getInfo",
+          "worker.session.save",
+          "worker.serve.serveFile"
+        ]
+      }
+  }]
+}
+

@@ -23,7 +23,7 @@ gulp.task('scripts', function() {
     // Copy html
     gulp.src('index.html')
         .pipe(htmlreplace({
-            'js': 'all.min.js',
+            'js': 'js/all.min.js',
             'css': 'css/main.css'
         }))
         .pipe(gulp.dest('build'));
@@ -48,8 +48,8 @@ gulp.task('scripts', function() {
         .pipe(rename('all.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('build/js'))
-        .pipe(rename('all.obfuscate.js'))
-        .pipe(obfuscate({ replaceMethod: obfuscate.ZALGO }))
+//        .pipe(rename('all.obfuscate.js'))
+//        .pipe(obfuscate({ replaceMethod: obfuscate.ZALGO }))
         .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('build/js'));
 });

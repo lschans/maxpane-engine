@@ -88,7 +88,7 @@ function movableBoxes(world, tick, callback) {
             world.movableBoxes.boxes.push(boxBody);
             world.movableBoxes.boxMeshes.push(boxMesh);
         }
-    }
+    };
 
     setInterval(function(){
         for(var i=0; i<world.movableBoxes.boxes.length; i++){

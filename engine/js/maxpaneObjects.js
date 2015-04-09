@@ -26,7 +26,7 @@ MP.add.addRotation = function(body, mesh) {
             this._z = this.z;
         }
     };
-}
+};
 
 MP.add.configTest = function(object) {
     if(typeof(object) !== 'object') object = {};
@@ -50,4 +50,4 @@ MP.add.configTest = function(object) {
     if(typeof(object.damping) == 'undefined') object.damping=0.9;
 
     return object;
-}
+};
