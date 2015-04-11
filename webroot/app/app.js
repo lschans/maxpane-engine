@@ -73,4 +73,19 @@ aasAdmin.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+
+        .state('game', {
+            url : '/game',
+            views : {
+                'navigation' : {
+                    templateUrl: 'app/views/navigation.html',
+                    controller: 'navigationController'
+                },
+                'main' : {
+                    templateUrl: 'app/views/game.html',
+                    controller: 'gameController'
+                }
+            }
+        })
+
 });

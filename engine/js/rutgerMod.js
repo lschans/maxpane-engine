@@ -5,12 +5,12 @@ function rutgerMod(world, tick, callback) {
     world.rutgerMod.outerCube = {};
 
     world.rutgerMod.innerCube.geometry = new THREE.BoxGeometry( 20, 20, 20 );
-    world.rutgerMod.innerCube.mesh = new THREE.Mesh( world.rutgerMod.innerCube.geometry, materials.blueWireThick );
+    world.rutgerMod.innerCube.mesh = new THREE.Mesh( world.rutgerMod.innerCube.geometry, world.materials.blueWireThick );
     world.rutgerMod.innerCube.mesh.position.y = 30;
     world.rutgerMod.innerCube.mesh.position.z = -800;
 
     world.rutgerMod.outerCube.geometry = new THREE.BoxGeometry( 40, 40, 40 );
-    world.rutgerMod.outerCube.mesh = new THREE.Mesh( world.rutgerMod.outerCube.geometry, materials.blueWireThin );
+    world.rutgerMod.outerCube.mesh = new THREE.Mesh( world.rutgerMod.outerCube.geometry, world.materials.blueWireThin );
     world.rutgerMod.outerCube.mesh.position.y = 30;
     world.rutgerMod.outerCube.mesh.position.z = -800;
 

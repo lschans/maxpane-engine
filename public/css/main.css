@@ -10,6 +10,15 @@
     outline: 0;
 }
 
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #00ff00;
+    margin: 1 1;
+    padding: 0;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -19,8 +28,6 @@ fieldset {
     border-color:#F00;
     border-style: solid;
 }
-
-
 
 .windowContainer {
     /*height: calc(100% - 110px);*/
@@ -284,7 +291,7 @@ input:-webkit-autofill {
 
 .menuCol{
     float:left;
-    width:50px;
+    width:15px;
     height: calc(100% - 110px);
     margin:1px;
     margin-top: 0px;
@@ -423,7 +430,7 @@ input:-webkit-autofill {
     display: inline;
     float: right;
     font-family: 'Gloria Hallelujah', cursive;
-    cursor: pointer; cursor: hand;
+    cursor: pointer;  cursor: hand;
 }
 
 .logout:hover {
@@ -448,12 +455,81 @@ ol a {
 }
 
 ol li a {
+    white-space: nowrap;
     display:block;
-    width: 178px;
+    width: 100%;
     text-decoration: none
 }
+
 ol li a:hover {
     background:#2f2;
     color:#000;
     border-radius: 5px;
+}
+
+.navCollapse {
+    white-space: nowrap;
+    text-decoration: none;
+    display: block;
+}
+
+.navCollapse:hover {
+    background:#2f2;
+    color:#000;
+    border-radius: 5px;
+}
+
+.game16to9res {
+    width: 960px;
+    height: 540px;
+    border-radius: 5px;
+    border: 1px solid #0f0;
+    padding: 1px;
+}
+
+#blocker {
+
+    position: relative;
+
+    top: 0px;
+    left: 0px;
+
+    width: 960px;
+    height: 540px;
+
+    background-color: rgba(0,0,0,0.8);
+
+}
+
+#positionbar {
+    background-color: rgba(0,0,0,0.5);
+    color: #00ff00;
+}
+
+#instructions {
+
+    width: 100%;
+    height: 100%;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    box-orient: horizontal;
+
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    box-pack: center;
+
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    box-align: center;
+
+    color: #00ff00;
+    text-align: center;
+
+    cursor: pointer;
+
 }

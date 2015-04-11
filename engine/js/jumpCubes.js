@@ -10,7 +10,7 @@ function jumpCubes(world, tick, callback) {
         y: 25,
         z: -500,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -21,7 +21,7 @@ function jumpCubes(world, tick, callback) {
         y: 25,
         z: -1000,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -32,7 +32,7 @@ function jumpCubes(world, tick, callback) {
         y: 25,
         z: -750,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -43,7 +43,7 @@ function jumpCubes(world, tick, callback) {
         y: 25,
         z: -750,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     world.jumpCubes.halfExtends = new CANNON.Vec3(10,10,10);
@@ -64,7 +64,7 @@ function jumpCubes(world, tick, callback) {
 
         var boxBody = new CANNON.Body({ mass: 0 });
         boxBody.addShape(world.jumpCubes.boxShape);
-        var boxMesh = new THREE.Mesh( world.jumpCubes.boxGeometry, materials.jumpCube );
+        var boxMesh = new THREE.Mesh( world.jumpCubes.boxGeometry, world.materials.jumpCube );
         world.bodies.push(boxBody);
         world.meshes.push(boxMesh);
         boxBody.position.set(x,y,z);

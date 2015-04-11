@@ -15,7 +15,7 @@ function rotateCube(world, tick, callback) {
         y:30,
         z:-350,
         mass:0,
-        material:materials.greenWireThick,
+        material:world.materials.greenWireThick,
         nonPhysMovement:true,
         update:true,
         hasPhys:false
@@ -29,7 +29,7 @@ function rotateCube(world, tick, callback) {
         y:30,
         z:-350,
         mass:0,
-        material:materials.redWireThick,
+        material:world.materials.redWireThick,
         nonPhysMovement:true,
         update:true,
         hasPhys:true
@@ -43,7 +43,7 @@ function rotateCube(world, tick, callback) {
         y:60,
         z:-150,
         mass:0.001,
-        material:materials.whiteWireThin,
+        material:world.materials.whiteWireThin,
         damping:0.001,
         update:true
     });

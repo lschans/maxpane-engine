@@ -11,7 +11,7 @@ function soundMachine(world, tick, callback) {
         y: 25,
         z: -100,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -22,7 +22,7 @@ function soundMachine(world, tick, callback) {
         y: 25,
         z: 200,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -33,7 +33,7 @@ function soundMachine(world, tick, callback) {
         y: 25,
         z: 50,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -44,13 +44,13 @@ function soundMachine(world, tick, callback) {
         y: 25,
         z: 50,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
 
     // radiusAtTop, radiusAtBottom, height, segmentsAroundRadius, segmentsAlongHeight
     world.soundMachine.machineCone.geometry = new THREE.CylinderGeometry( 1, 5, 25, 16, 3 );
-    world.soundMachine.machineCone.mesh = new THREE.Mesh( world.soundMachine.machineCone.geometry, materials.greenWireThin );
+    world.soundMachine.machineCone.mesh = new THREE.Mesh( world.soundMachine.machineCone.geometry, world.materials.greenWireThin );
     world.soundMachine.machineCone.mesh.position.x = 650;
     world.soundMachine.machineCone.mesh.position.y = 15;
     world.soundMachine.machineCone.mesh.position.z = 50;

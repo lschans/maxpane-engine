@@ -11,7 +11,7 @@ function movableBoxes(world, tick, callback) {
         y: 25,
         z: -500,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -22,7 +22,7 @@ function movableBoxes(world, tick, callback) {
         y: 25,
         z: -200,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -33,7 +33,7 @@ function movableBoxes(world, tick, callback) {
         y: 25,
         z: -350,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -44,7 +44,7 @@ function movableBoxes(world, tick, callback) {
         y: 25,
         z: -437.5,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
     MP.add.box(world, tick, {
@@ -55,7 +55,7 @@ function movableBoxes(world, tick, callback) {
         y: 25,
         z: -262.5,
         mass: 0,
-        material: materials.glassWall
+        material: world.materials.glassWall
     });
 
 
@@ -78,7 +78,7 @@ function movableBoxes(world, tick, callback) {
 
             var boxBody = new CANNON.Body({mass: 2});
             boxBody.addShape(world.movableBoxes.boxShape);
-            var boxMesh = new THREE.Mesh(world.movableBoxes.boxGeometry, materials.blueHalfSolid);
+            var boxMesh = new THREE.Mesh(world.movableBoxes.boxGeometry, world.materials.blueHalfSolid);
             world.physWorld.add(boxBody);
             world.scene.add(boxMesh);
             boxBody.position.set(x, y, z);

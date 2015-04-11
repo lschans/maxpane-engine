@@ -1,64 +1,71 @@
-var materials = {};
+function materials(world, tick, callback) {
 
-// Wire materials
-materials.redWireThick = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, wireframeLinewidth: 4, transparent:false } );
-materials.redWireNormal = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, wireframeLinewidth: 2, transparent:false } );
-materials.redWireThin = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, wireframeLinewidth: 1, transparent:false } );
-materials.greenWireThick = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, wireframeLinewidth: 4, transparent:false } );
-materials.greenWireThickTrans = new THREE.MeshBasicMaterial( { color: 0x00ff00, transparent: true, opacity: 0.5, wireframe: true, wireframeLinewidth: 4} );
-materials.greenWireNormal = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, wireframeLinewidth: 2, transparent:false } );
-materials.greenWireThin = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, wireframeLinewidth: 1, transparent:false } );
-materials.blueWireThick = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true, wireframeLinewidth: 4, transparent:false } );
-materials.blueWireNormal = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true, wireframeLinewidth: 2, transparent:false } );
-materials.blueWireThin = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true, wireframeLinewidth: 1, transparent:false } );
-materials.whiteWireThin = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true, wireframeLinewidth: 1, transparent:false } );
+    world.materials = {};
+    
+    // Wire materials
+    world.materials.redWireThick = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, wireframeLinewidth: 4, transparent:false } );
+    world.materials.redWireNormal = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, wireframeLinewidth: 2, transparent:false } );
+    world.materials.redWireThin = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, wireframeLinewidth: 1, transparent:false } );
+    world.materials.greenWireThick = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, wireframeLinewidth: 4, transparent:false } );
+    world.materials.greenWireThickTrans = new THREE.MeshBasicMaterial( { color: 0x00ff00, transparent: true, opacity: 0.5, wireframe: true, wireframeLinewidth: 4} );
+    world.materials.greenWireNormal = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, wireframeLinewidth: 2, transparent:false } );
+    world.materials.greenWireThin = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, wireframeLinewidth: 1, transparent:false } );
+    world.materials.blueWireThick = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true, wireframeLinewidth: 4, transparent:false } );
+    world.materials.blueWireNormal = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true, wireframeLinewidth: 2, transparent:false } );
+    world.materials.blueWireThin = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true, wireframeLinewidth: 1, transparent:false } );
+    world.materials.whiteWireThin = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true, wireframeLinewidth: 1, transparent:false } );
+    
+    //Floor materials
+    world.materials.greenFloorThin = new THREE.MeshBasicMaterial( { color: 0x009900, wireframe: true, wireframeLinewidth: 1, transparent:false } );
+    
+    // Ammo materials
+    world.materials.greenAmmo = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, transparent: false } );
+    
+    // Solid materials
+    world.materials.redHalfSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.5, side:THREE.DoubleSide });
+    world.materials.greenHalfSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.5, side:THREE.DoubleSide });
+    world.materials.blueHalfSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.5, side:THREE.DoubleSide });
+    world.materials.blackSolid = new THREE.MeshBasicMaterial( { color: 0x000000, transparent:false, side:THREE.DoubleSide } );
+    
+    // Character materials
+    world.materials.redCharSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.7, side:THREE.DoubleSide });
+    world.materials.greenCharSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.7, side:THREE.DoubleSide });
+    world.materials.blueCharSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.7, side:THREE.DoubleSide });
+    world.materials.blueCharConeSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.9, side:THREE.DoubleSide });
+    world.materials.greenCharDomeSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.9, side:THREE.DoubleSide });
+    
+    // Stitched planks material
+    world.materials.redPlankSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
+    world.materials.greenPlankSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
+    world.materials.bluePlankSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
+    
+    // Wall material
+    world.materials.glassWall = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.4, side:THREE.DoubleSide });
+    
+    
+    // Star material
+    world.materials.stars  = new THREE.MeshBasicMaterial();
+    world.materials.stars.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield.png');
+    world.materials.stars.side  = THREE.BackSide;
+    
+    world.materials.starsAlpha  = new THREE.MeshBasicMaterial({ transparent: true});
+    world.materials.starsAlpha.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield_alpha.png');
+    world.materials.starsAlpha.side  = THREE.BackSide;
+    
+    // Particle stars material
+    world.materials.particlestars = new THREE.PointCloudMaterial({ color: 0x00ff00, blending: THREE.AdditiveBlending, transparent: true, size:1});
+    
+    // Jump cubes material, define all faces to have the top face solid
+    world.materials.jumpCube = new THREE.MeshFaceMaterial([
+        world.materials.blueWireNormal,
+        world.materials.blueWireNormal,
+        world.materials.greenHalfSolid,
+        world.materials.blueWireNormal,
+        world.materials.blueWireNormal,
+        world.materials.blueWireNormal
+    ]);
 
-//Floor materials
-materials.greenFloorThin = new THREE.MeshBasicMaterial( { color: 0x009900, wireframe: true, wireframeLinewidth: 1, transparent:false } );
-
-// Ammo materials
-materials.greenAmmo = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true, transparent: false } );
-
-// Solid materials
-materials.redHalfSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.5, side:THREE.DoubleSide });
-materials.greenHalfSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.5, side:THREE.DoubleSide });
-materials.blueHalfSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.5, side:THREE.DoubleSide });
-materials.blackSolid = new THREE.MeshBasicMaterial( { color: 0x000000, transparent:false, side:THREE.DoubleSide } );
-
-// Character materials
-materials.redCharSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.7, side:THREE.DoubleSide });
-materials.greenCharSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.7, side:THREE.DoubleSide });
-materials.blueCharSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.7, side:THREE.DoubleSide });
-materials.blueCharConeSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.9, side:THREE.DoubleSide });
-materials.greenCharDomeSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.9, side:THREE.DoubleSide });
-
-// Stitched planks material
-materials.redPlankSolid = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
-materials.greenPlankSolid = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
-materials.bluePlankSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
-
-// Wall material
-materials.glassWall = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.4, side:THREE.DoubleSide });
-
-
-// Star material
-materials.stars  = new THREE.MeshBasicMaterial();
-materials.stars.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield.png');
-materials.stars.side  = THREE.BackSide;
-
-materials.starsAlpha  = new THREE.MeshBasicMaterial({ transparent: true});
-materials.starsAlpha.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield_alpha.png');
-materials.starsAlpha.side  = THREE.BackSide;
-
-// Particle stars material
-materials.particlestars = new THREE.PointCloudMaterial({ color: 0x00ff00, blending: THREE.AdditiveBlending, transparent: true, size:1});
-
-// Jump cubes material, define all faces to have the top face solid
-materials.jumpCube = new THREE.MeshFaceMaterial([
-    materials.blueWireNormal,
-    materials.blueWireNormal,
-    materials.greenHalfSolid,
-    materials.blueWireNormal,
-    materials.blueWireNormal,
-    materials.blueWireNormal
-]);
+    // Return or next
+    if(typeof(callback) === 'function') callback(world, tick);
+    else return [world, tick];
+}

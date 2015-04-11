@@ -23,7 +23,7 @@ function shooter(world, tick, callback) {
             var shootDirection = new THREE.Vector3();
             var ballBody = new CANNON.Body({ mass: 4 });
             ballBody.addShape(world.shooter.ballShape);
-            var ballMesh = new THREE.Mesh( world.shooter.ballGeometry, materials.greenAmmo );
+            var ballMesh = new THREE.Mesh( world.shooter.ballGeometry, world.materials.greenAmmo );
             world.physWorld.add(ballBody);
             world.scene.add(ballMesh);
 

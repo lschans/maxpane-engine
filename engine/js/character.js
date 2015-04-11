@@ -26,40 +26,33 @@ function character(world, tick, callback) {
     world.character.bodyTorusLow = {};
     world.character.bodyDome = {};
 
-
-
-
     world.character.bodyInner.geometry = new THREE.SphereGeometry( 3, 10, 10 );
-    world.character.bodyInner.mesh = new THREE.Mesh( world.character.bodyInner.geometry, materials.redCharSolid );
+    world.character.bodyInner.mesh = new THREE.Mesh( world.character.bodyInner.geometry, world.materials.redCharSolid );
     world.character.bodyInner.mesh.velocity =  new THREE.Vector3(0, 0, 0);
     world.character.bodyInner.mesh.position.y = 0;
     world.character.bodyInner.mesh.position.z = 0;
 
-
-
-
-
     world.character.bodyOuter.geometry = new THREE.SphereGeometry( 4, 10, 10 );
-    world.character.bodyOuter.mesh = new THREE.Mesh( world.character.bodyOuter.geometry, materials.greenWireThin );
+    world.character.bodyOuter.mesh = new THREE.Mesh( world.character.bodyOuter.geometry, world.materials.greenWireThin );
     world.character.bodyOuter.mesh.velocity =  new THREE.Vector3(0, 0, 0);
     world.character.bodyOuter.mesh.position.y = 0;
     world.character.bodyOuter.mesh.position.z = 0;
 
     // radiusAtTop, radiusAtBottom, height, segmentsAroundRadius, segmentsAlongHeight
     world.character.bodyConeInner.geometry = new THREE.CylinderGeometry( 2.9, 4.4, 5, 8, 3 );
-    world.character.bodyConeInner.mesh = new THREE.Mesh( world.character.bodyConeInner.geometry, materials.blueCharConeSolid );
+    world.character.bodyConeInner.mesh = new THREE.Mesh( world.character.bodyConeInner.geometry, world.materials.blueCharConeSolid );
     world.character.bodyConeInner.mesh.position.y = 7;
     world.character.bodyConeInner.mesh.position.z = 0;
 
     // radiusAtTop, radiusAtBottom, height, segmentsAroundRadius, segmentsAlongHeight
     world.character.bodyConeOuter.geometry = new THREE.CylinderGeometry( 3.1, 4.6, 5, 16, 1 );
-    world.character.bodyConeOuter.mesh = new THREE.Mesh( world.character.bodyConeOuter.geometry, materials.greenWireThin );
+    world.character.bodyConeOuter.mesh = new THREE.Mesh( world.character.bodyConeOuter.geometry, world.materials.greenWireThin );
     world.character.bodyConeOuter.mesh.position.y = 7;
     world.character.bodyConeOuter.mesh.position.z = 0;
 
     // radius of entire torus, diameter of tube (less than total radius), sides per cylinder segment, cylinders around torus ("sides")
     world.character.bodyTorusLow.geometry = new THREE.TorusGeometry( 5, 1, 5, 16 );
-    world.character.bodyTorusLow.mesh = new THREE.Mesh( world.character.bodyTorusLow.geometry, materials.blueCharConeSolid );
+    world.character.bodyTorusLow.mesh = new THREE.Mesh( world.character.bodyTorusLow.geometry, world.materials.blueCharConeSolid );
     world.character.bodyTorusLow.mesh.rotation.x = 300;
     world.character.bodyTorusLow.mesh.position.y = -2.6;
     // Add torus to body cone
@@ -67,7 +60,7 @@ function character(world, tick, callback) {
 
     // Head dome
     world.character.bodyDome.geometry = new THREE.SphereGeometry( 3.1, 16, 16, 0, 2 * Math.PI, 0, Math.PI / 2 );
-    world.character.bodyDome.mesh = new THREE.Mesh( world.character.bodyDome.geometry, materials.greenCharDomeSolid );
+    world.character.bodyDome.mesh = new THREE.Mesh( world.character.bodyDome.geometry, world.materials.greenCharDomeSolid );
     world.character.bodyDome.mesh.position.y = 3;
     // Add Dome to body cone
     world.character.bodyConeOuter.mesh.add( world.character.bodyDome.mesh);

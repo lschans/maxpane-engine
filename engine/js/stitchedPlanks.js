@@ -5,9 +5,9 @@ function stitchedPlanks(world, tick, callback) {
     world.stitchedPlanks.boxMeshes = [];
     world.stitchedPlanks.materials = [];
 
-    world.stitchedPlanks.materials[0] = materials.redPlankSolid;
-    world.stitchedPlanks.materials[1] = materials.greenPlankSolid;
-    world.stitchedPlanks.materials[2] = materials.bluePlankSolid;
+    world.stitchedPlanks.materials[0] = world.materials.redPlankSolid;
+    world.stitchedPlanks.materials[1] = world.materials.greenPlankSolid;
+    world.stitchedPlanks.materials[2] = world.materials.bluePlankSolid;
 
     // Add linked world.stitchedPlanks.boxes
     world.stitchedPlanks.size = 3;
@@ -69,7 +69,7 @@ function stitchedPlanks(world, tick, callback) {
         y:20,
         z:-375,
         mass:0,
-        material:materials.redPlankSolid
+        material:world.materials.redPlankSolid
     });
 
     MP.add.box(world, tick, {
@@ -80,7 +80,7 @@ function stitchedPlanks(world, tick, callback) {
         y:45,
         z:-350,
         mass:0,
-        material:materials.redPlankSolid
+        material:world.materials.redPlankSolid
     });
 
     MP.add.box(world, tick, {
@@ -91,7 +91,7 @@ function stitchedPlanks(world, tick, callback) {
         y:20,
         z:-325,
         mass:0,
-        material:materials.redPlankSolid
+        material:world.materials.redPlankSolid
     });
 
     // N, x, z

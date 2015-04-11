@@ -6,8 +6,8 @@ function surrounding(world, tick, callback) {
     world.surrounding.sphereAlpha  = new THREE.SphereGeometry(1800, 50, 50);
 
     // Create mesh with star material
-    world.surrounding.mesh  = new THREE.Mesh(world.surrounding.sphere, materials.stars);
-    world.surrounding.meshAlpha  = new THREE.Mesh(world.surrounding.sphereAlpha, materials.starsAlpha);
+    world.surrounding.mesh  = new THREE.Mesh(world.surrounding.sphere, world.materials.stars);
+    world.surrounding.meshAlpha  = new THREE.Mesh(world.surrounding.sphereAlpha, world.materials.starsAlpha);
 
     world.surrounding.meshAlpha.rotation.y = 350;
 

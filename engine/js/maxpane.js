@@ -5,17 +5,6 @@ var settings = {},
     maxpaneWorld,
     maxpaneTick;
 
-settings.camera = {};
-settings.camera.fov = 75;
-settings.camera.width = window.innerWidth;
-settings.camera.height = window.innerHeight;
-settings.camera.near = 2;
-settings.camera.far = 2500;
-
-settings.gravityX = 0;
-settings.gravityY = -9.8 * 50; // Looks odd, but its a game.. and this feels 'real' for the level.
-settings.gravityZ = 0;
-
 function syncItter (world, tick){
     // Function that iterates over a given array with callback functions
     var myFunction = world.funcArray.shift();
@@ -34,6 +23,18 @@ function syncIt (world, tick, functionArray) {
 }
 
 function worldInit(){
+    // Populate settings
+    settings.camera = {};
+    settings.camera.fov = 75;
+    settings.camera.width = 960;
+    settings.camera.height = 540;
+    settings.camera.near = 2;
+    settings.camera.far = 2500;
+
+    settings.gravityX = 0;
+    settings.gravityY = -9.8 * 50; // Looks odd, but its a game.. and this feels 'real' for the level.
+    settings.gravityZ = 0;
+
     // Add camera
     world.objects = [];
     world.meshes = [];
@@ -104,7 +105,7 @@ function worldInit(){
     world.scene = new THREE.Scene();
 
     // Add renderer
-    world.renderer = new THREE.WebGLRenderer();
+    world.renderer = new THREE.WebGLRenderer({canvas: mpGameCanvas});
 
     // Fallback renderer for clients without webGL.. 8fps.. so not really an option
     //world.renderer = new THREE.CanvasRenderer();
@@ -114,7 +115,7 @@ function worldInit(){
     world.renderer.shadowMapSoft = false;
     world.renderer.setClearColor( 0x000000 );
     world.renderer.setPixelRatio( window.devicePixelRatio );
-    world.renderer.setSize( window.innerWidth, window.innerHeight );
+    world.renderer.setSize( 960, 540 );
 
     world.loader = new THREE.JSONLoader(); // init the loader util
 
@@ -122,25 +123,18 @@ function worldInit(){
 
     // World velocity is probably outdated since we have physics
     world.velocity = new THREE.Vector3();
-
-    window.addEventListener( 'resize', onWindowResize, true );
 }
 
-function onWindowResize() {
-    world.camera.aspect = window.innerWidth / window.innerHeight;
-    world.camera.updateProjectionMatrix();
 
-    world.renderer.setSize( window.innerWidth, window.innerHeight );
-}
 
 var stats = new Stats();
-stats.setMode(0);  // 0: fps, 1: ms
 
 function maxpaneStats() {
+    stats.setMode(0);  // 0: fps, 1: ms
     stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
-    document.body.appendChild( stats.domElement );
+    //stats.domElement.style.left = document.getElementById('mpGameCanvas').getBoundingClientRect().left + 'px';
+    stats.domElement.style.top = document.getElementById('mpGameCanvas').getBoundingClientRect().top + 'px';
+    document.getElementById('gameContainer').appendChild( stats.domElement );
 }
 
 function maxpaneRender(world, tick) {
@@ -152,7 +146,7 @@ function maxpaneRender(world, tick) {
         world.scene.add(mesh);
     });
 
-    document.body.appendChild( world.renderer.domElement );
+    //document.getElementById('gameContainer').appendChild( world.renderer.domElement );
     maxpaneWorld = world;
     maxpaneTick = tick;
     maxpaneAnimate();
@@ -182,6 +176,7 @@ function maxpaneAnimate() {
 
 function game(world, tick) {
     var devgame = [
+        materials,
         audio,
         bgMusic,
         //character,
@@ -192,7 +187,7 @@ function game(world, tick) {
         particlestars,
         jumpCubes,
         rotateCube,
-        positionbar,
+        //positionbar,
         //rutgerMod,
         shooter,
         movableBoxes,
@@ -204,7 +199,3 @@ function game(world, tick) {
     maxpaneStats();
 }
 
-window.onload = function () {
-    worldInit();
-    game(world, tick);
-};
