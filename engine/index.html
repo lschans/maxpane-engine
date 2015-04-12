@@ -25,33 +25,39 @@
         <script src="bower_components/cannon.js/build/cannon.js"></script>
 
         <!-- build:js -->
-        <script src='js/maxpaneObjects.js'></script>
-        <script src='js/maxpaneObjects.box.js'></script>
-        <script src='js/maxpaneObjects.sphere.js'></script>
+        <script src='js/maxpane.init.js'></script>
+        <script src='js/maxpane.add.test.js'></script>
+        <script src='js/maxpane.add.rotation.js'></script>
+        <script src='js/maxpane.objects.box.js'></script>
+        <script src='js/maxpane.objects.sphere.js'></script>
+        <script src='js/maxpane.intervals.js'></script>
+        <script src='js/maxpane.renderer.js'></script>
+        <script src='js/maxpane.view.game.js'></script>
+
         <script src='vendor/PointerLockControls.js'></script>
         <script src='bower_components/webaudiox/lib/webaudiox.shim.js'></script>
         <script src='bower_components/webaudiox/lib/webaudiox.loadbuffer.js'></script>
         <script src='bower_components/webaudiox/lib/webaudiox.lineout.js'></script>
         <script src='bower_components/webaudiox/lib/webaudiox.binaural.js'></script>
         <script src='bower_components/webaudiox/lib/webaudiox.three.js'></script>
-        <script src="js/audio.js"></script>
-        <script src="js/maxpaneControls.js"></script>
-        <script src="js/pointerLock.js"></script>
-        <script src="js/materials.js"></script>
-        <script src="js/physMaterials.js"></script>
-        <script src="js/surrounding.js"></script>
-        <script src="js/character.js"></script>
-        <script src="js/floor.js"></script>
-        <script src="js/shooter.js"></script>
-        <script src="js/movableBoxes.js"></script>
-        <script src="js/particlestars.js"></script>
-        <script src="js/stitchedPlanks.js"></script>
-        <script src="js/positionbar.js"></script>
-        <script src="js/jumpCubes.js"></script>
-        <script src="js/rotateCube.js"></script>
-        <script src="js/rutgerMod.js"></script>
-        <script src="js/bgMusic.js"></script>
-        <script src="js/soundMachine.js"></script>
+        <script src="js/maxpane_modules/audio.js"></script>
+        <script src="js/maxpane_modules/maxpaneControls.js"></script>
+        <script src="js/maxpane_modules/pointerLock.js"></script>
+        <script src="js/maxpane_modules/materials.js"></script>
+        <script src="js/maxpane_modules/physMaterials.js"></script>
+        <script src="js/maxpane_modules/surrounding.js"></script>
+        <script src="js/maxpane_modules/character.js"></script>
+        <script src="js/maxpane_modules/floor.js"></script>
+        <script src="js/maxpane_modules/shooter.js"></script>
+        <script src="js/maxpane_modules/movableBoxes.js"></script>
+        <script src="js/maxpane_modules/particlestars.js"></script>
+        <script src="js/maxpane_modules/stitchedPlanks.js"></script>
+        <script src="js/maxpane_modules/positionbar.js"></script>
+        <script src="js/maxpane_modules/jumpCubes.js"></script>
+        <script src="js/maxpane_modules/rotateCube.js"></script>
+        <script src="js/maxpane_modules/rutgerMod.js"></script>
+        <script src="js/maxpane_modules/bgMusic.js"></script>
+        <script src="js/maxpane_modules/soundMachine.js"></script>
         <script src="js/maxpane.js"></script>
         <!-- endbuild -->
 
@@ -67,19 +73,4 @@
         </div>
 
     </body>
-    <script>
-        function onWindowResize() {
-            world.camera.aspect = window.innerWidth / window.innerHeight;
-            world.camera.updateProjectionMatrix();
-            world.renderer.setSize( window.innerWidth, window.innerHeight );
-        }
-
-        window.addEventListener( 'resize', onWindowResize, true );
-
-        window.onload = function () {
-            worldInit();
-            onWindowResize()
-            game(world, tick);
-        };
-    </script>
 </html>

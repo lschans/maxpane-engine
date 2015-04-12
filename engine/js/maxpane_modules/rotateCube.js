@@ -48,8 +48,6 @@ function rotateCube(world, tick, callback) {
         update:true
     });
 
-    console.log(world.rotateCube.outerCube.body);
-
     tick.push(function(world){
         // add some rotation to the cube
         world.rotateCube.innerCube.mesh.rotation.y -= 0.02;

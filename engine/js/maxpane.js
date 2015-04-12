@@ -5,6 +5,24 @@ var settings = {},
     maxpaneWorld,
     maxpaneTick;
 
+
+
+// Populate settings
+settings.camera = {};
+settings.camera.fov = 75;
+settings.camera.width = 960;
+settings.camera.height = 540;
+settings.camera.near = 2;
+settings.camera.far = 2500;
+
+settings.gravityX = 0;
+settings.gravityY = -9.8 * 50; // Looks odd, but its a game.. and this feels 'real' for the level.
+settings.gravityZ = 0;
+
+function empty(elem) {
+    while (elem.lastChild) elem.removeChild(elem.lastChild);
+}
+
 function syncItter (world, tick){
     // Function that iterates over a given array with callback functions
     var myFunction = world.funcArray.shift();
@@ -22,19 +40,39 @@ function syncIt (world, tick, functionArray) {
     syncItter(world, tick);
 }
 
+function worldClear(world) {
+    gamePause();
+
+    world.bodies.map(function(body) {
+        world.physWorld.remove(body);
+    });
+
+    world.meshes.map(function(mesh){
+        world.scene.remove(mesh);
+    });
+
+
+    world.audio.lineOut.toggleMute();
+    world.audio.lineOut = null;
+    world.audio.context = null;
+
+    world.objects = null;
+    world.meshes = null;
+    world.bodies = null;
+
+    world.scene = null;
+    world.projector = null;
+    world.camera = null;
+    world.player = null;
+    world.velocity = null;
+
+    world = null;
+
+    maxpaneWorld = null;
+    maxpaneTick = null;
+}
+
 function worldInit(){
-    // Populate settings
-    settings.camera = {};
-    settings.camera.fov = 75;
-    settings.camera.width = 960;
-    settings.camera.height = 540;
-    settings.camera.near = 2;
-    settings.camera.far = 2500;
-
-    settings.gravityX = 0;
-    settings.gravityY = -9.8 * 50; // Looks odd, but its a game.. and this feels 'real' for the level.
-    settings.gravityZ = 0;
-
     // Add camera
     world.objects = [];
     world.meshes = [];
@@ -156,8 +194,16 @@ var d = new Date();
 var lastTimeMsec = null;
 var time = Date.now();
 
+var doAnimate = true;
+
 function maxpaneAnimate() {
-    requestAnimationFrame( maxpaneAnimate );
+    if(doAnimate) {
+        requestAnimationFrame(maxpaneAnimate);
+    } else {
+        cancelAnimationFrame(maxpaneAnimate);// Stop the animation
+        return true;
+    }
+
     stats.begin();
     // measure time and time delta
     maxpaneWorld.nowMsec = d.getMilliseconds();
@@ -173,6 +219,19 @@ function maxpaneAnimate() {
     time = Date.now();
     stats.end();
 }
+
+function gamePause() {
+    doAnimate = false;
+    return true;
+}
+
+function gameResume() {
+    doAnimate = true;
+    maxpaneAnimate();
+    return true;
+}
+
+
 
 function game(world, tick) {
     var devgame = [

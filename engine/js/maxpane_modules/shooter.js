@@ -4,7 +4,6 @@ function shooter(world, tick, callback) {
 
     world.shooter.ballShape = new CANNON.Sphere(3.5);
     world.shooter.ballGeometry = new THREE.SphereGeometry(world.shooter.ballShape.radius, 10, 10);
-    shootDirection = new THREE.Vector3();
     world.shooter.shootVelo = 500;
 
     world.shooter.balls = [];

@@ -40,7 +40,7 @@ function materials(world, tick, callback) {
     world.materials.bluePlankSolid = new THREE.MeshBasicMaterial({ color: 0x0000ff, transparent: true, opacity: 0.8, side:THREE.DoubleSide });
     
     // Wall material
-    world.materials.glassWall = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.4, side:THREE.DoubleSide });
+    //world.materials.glassWall = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.4, side:THREE.DoubleSide });
     
     
     // Star material
@@ -64,6 +64,25 @@ function materials(world, tick, callback) {
         world.materials.blueWireNormal,
         world.materials.blueWireNormal
     ]);
+
+
+    // Vertex shader for glass
+    var vShadeGlass =
+    "void main(){" +
+    "    gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);" +
+    "}";
+
+    // Fragment shader for glass
+    var fShadeGlass =
+    "uniform float DepthScale;" +
+    "void main(){" +
+    "float depth = (DepthScale * gl_FragCoord.z * 1.5) + 0.3;" +
+    "gl_FragColor = vec4(depth, depth, depth, 0.3);" +
+    "}";
+
+    world.materials.glassWall = new THREE.ShaderMaterial({vertexShader:   vShadeGlass, fragmentShader: fShadeGlass, transparent: true });
+
+
 
     // Return or next
     if(typeof(callback) === 'function') callback(world, tick);

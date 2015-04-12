@@ -10,6 +10,10 @@ aasAdmin.controller('gameController',
         function($scope, $cookies, ioSocket, $sce, $globals, $game, $measure) {
             $scope.gameRunning = $globals.get('gameRunning');
 
+            $scope.$on("$destroy", function(){
+                console.log('Exit game controller');
+            });
+
             $scope.$on('$viewContentLoaded', function() {
 
                 var canvasOffset = $measure.getOffset(document.getElementById('mpGameCanvas'));
@@ -19,14 +23,12 @@ aasAdmin.controller('gameController',
 
                 console.log(document.getElementById('navigation').offsetWidth);
 
-                if($scope.gameRunning == false) {
+                //if($scope.gameRunning == false) {
                     worldInit();
                     game(world, tick);
                     $scope.gameRunning = true;
                     $globals.set('gameRunning', $scope.gameRunning);
-                }
-
-
+                //}
             });
             return 0;
         }

@@ -57,6 +57,7 @@ gulp.task('scripts', function() {
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
+    gulp.watch('js/maxpane_modules/*.js', ['lint', 'scripts']);
 });
 
 // Default Task
