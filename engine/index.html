@@ -33,6 +33,7 @@
         <script src='js/maxpane.intervals.js'></script>
         <script src='js/maxpane.renderer.js'></script>
         <script src='js/maxpane.view.game.js'></script>
+        <script src='js/maxpane.collision.distance.js'></script>
 
         <script src='vendor/PointerLockControls.js'></script>
         <script src='bower_components/webaudiox/lib/webaudiox.shim.js'></script>
@@ -63,7 +64,9 @@
 
     </head>
     <body>
-        <div id="gameContainer"><canvas id="mpGameCanvas" width="960" height="540"></canvas></div>
+        <div id="gameContainer">
+            <canvas id="mpGameCanvas" width="960" height="540"></canvas>
+        </div>
         <div id="blocker">
             <div id="instructions">
                 <span style="font-size:40px">Click to play</span>

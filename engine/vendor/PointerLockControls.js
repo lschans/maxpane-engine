@@ -3,9 +3,11 @@
  * @author schteppe / https://github.com/schteppe
  * @author lschans / https://github.com/lschans
  */
- var PointerLockControls = function ( camera, cannonBody ) {
+ var PointerLockControls = function (world) {
 
-    var eyeYPos = 20; // eyes are 2 meters above the ground
+    var camera = world.camera;
+    var cannonBody = world.player.sphereBody;
+
     var velocityFactor = 4;
     var jumpVelocity = 300;
     var scope = this;
@@ -23,6 +25,7 @@
     var moveBackward = false;
     var moveLeft = false;
     var moveRight = false;
+    var stop = false;
 
     var canJump = false;
 
@@ -83,6 +86,11 @@
                 moveRight = true;
                 break;
 
+            case 69: // e
+                stop = true;
+                break;
+
+
             case 32: // space
                 if ( canJump === true ){
                     velocity.y = jumpVelocity;
@@ -117,6 +125,9 @@
                 moveRight = false;
                 break;
 
+            case 69: // e
+                stop = false;
+                break;
         }
 
     };
@@ -138,27 +149,61 @@
 
     // Moves the camera to the Cannon.js object position and adds velocity to the object if the run key is down
     var inputVelocity = new THREE.Vector3();
+    var worldEdge = 1800;
+    var oldDist = worldEdge;
     var euler = new THREE.Euler();
+
+
     this.update = function ( delta ) {
 
-        if ( scope.enabled === false ) return;
+        if (scope.enabled === false) return;
 
         delta *= 0.1;
 
-        inputVelocity.set(0,0,0);
+        inputVelocity.set(0, 0, 0);
+        // Detect world boundry and stop movement
+        var dist = MP.collision.distance(
+            {x:0,y:0,z:0}, // World
+            {x:world.player.sphereBody.position.x,y:world.player.sphereBody.position.y,z:world.player.sphereBody.position.z} // Player
+        );
 
-        if ( moveForward ){
-            inputVelocity.z = -velocityFactor * delta;
-        }
-        if ( moveBackward ){
-            inputVelocity.z = velocityFactor * delta;
-        }
+        var averageVelocity = (Math.abs(velocity.x) + Math.abs(velocity.z) ) / 2;
 
-        if ( moveLeft ){
-            inputVelocity.x = -velocityFactor * delta;
-        }
-        if ( moveRight ){
-            inputVelocity.x = velocityFactor * delta;
+        // Add a bumper around the world... Like an invisible rubber border you cannot pass
+        if(dist.distance >= worldEdge && averageVelocity > 0) {
+            oldDist = dist.distance;
+            if(oldDist >= dist.distance) {
+                // Invert controls if we are moving away further from the center
+                if (moveForward) {
+                    if(yawObject.position.z > 0 && velocity.z > 0) inputVelocity.z = -velocityFactor * delta;
+                    else inputVelocity.z = velocityFactor * delta;
+                }
+                if (moveBackward) {
+                    if(yawObject.position.z < 0&& velocity.z > 0) inputVelocity.z = velocityFactor * delta;
+                    else inputVelocity.z = -velocityFactor * delta;
+                }
+                if (moveLeft) {
+                    if(yawObject.position.x > 0&& velocity.x > 0) inputVelocity.x = -velocityFactor * delta;
+                    else inputVelocity.x = velocityFactor * delta;
+                }
+                if (moveRight) {
+                    if(yawObject.position.x < 0&& velocity.x > 0) inputVelocity.x = velocityFactor * delta;
+                    else inputVelocity.x = -velocityFactor * delta;
+                }
+            }
+        } else {
+            if (moveForward) {
+                inputVelocity.z = -velocityFactor * delta;
+            }
+            if (moveBackward) {
+                inputVelocity.z = velocityFactor * delta;
+            }
+            if (moveLeft) {
+                inputVelocity.x = -velocityFactor * delta;
+            }
+            if (moveRight) {
+                inputVelocity.x = velocityFactor * delta;
+            }
         }
 
         // Convert velocity to world coordinates
@@ -174,7 +219,6 @@
         velocity.z += inputVelocity.z;
 
         yawObject.position.copy(cannonBody.position);
-
 
         if(yawObject.rotation.x < -6.29) yawObject.rotation.x = 0;
         if(yawObject.rotation.x > 0) yawObject.rotation.x = -6.29;

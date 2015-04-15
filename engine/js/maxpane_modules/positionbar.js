@@ -10,9 +10,12 @@ function positionbar(world, tick, callback) {
     world.devpositionbar.innerHTML = "DEVBAR";
 
     // Insert on top of body
-    document.body.insertBefore(world.devpositionbar,document.getElementById('gameContainer').firstChild);
+    document.body.insertBefore(world.devpositionbar,document.getElementById('blocker'));
+    //document.body.insertBefore(world.devpositionbar, document.body.firstChild);
 
     tick.push(function(world){
+        var dist = MP.collision.distance({x:0,y:0,z:0}, {x:world.player.sphereBody.position.x,y:world.player.sphereBody.position.y,z:world.player.sphereBody.position.z});
+
         world.devpositionbar.innerHTML =
             'Position ( x: ' + Math.round(world.player.sphereBody.position.x) +
             ' y: ' + Math.round(world.player.sphereBody.position.y) +
@@ -23,6 +26,10 @@ function positionbar(world, tick, callback) {
             ') Velocity ( x: ' + Math.round(world.player.sphereBody.velocity.x) +
             ' y: ' + Math.round(world.player.sphereBody.velocity.y) +
             ' z: ' + Math.round(world.player.sphereBody.velocity.z) +
+            ') Distance ( total: ' + Math.round(dist.distance) +
+            ' x: ' + Math.round(dist.x) +
+            ' y: ' + Math.round(dist.y) +
+            ' z: ' + Math.round(dist.z) +
             ')';
     });
 

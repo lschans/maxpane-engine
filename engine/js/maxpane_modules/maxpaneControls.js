@@ -1,7 +1,7 @@
 function maxpaneControls(world, tick, callback) {
 
     // If no other module has taken over the controls, set controls to camera ( fpv )
-    if(typeof(world.controls) === 'undefined') world.controls = new PointerLockControls(world.camera, world.player.sphereBody);
+    if(typeof(world.controls) === 'undefined') world.controls = new PointerLockControls(world);
 
     world.scene.add(world.controls.getObject());
 

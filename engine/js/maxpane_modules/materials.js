@@ -41,17 +41,7 @@ function materials(world, tick, callback) {
     
     // Wall material
     //world.materials.glassWall = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.4, side:THREE.DoubleSide });
-    
-    
-    // Star material
-    world.materials.stars  = new THREE.MeshBasicMaterial();
-    world.materials.stars.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield.png');
-    world.materials.stars.side  = THREE.BackSide;
-    
-    world.materials.starsAlpha  = new THREE.MeshBasicMaterial({ transparent: true});
-    world.materials.starsAlpha.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield_alpha.png');
-    world.materials.starsAlpha.side  = THREE.BackSide;
-    
+
     // Particle stars material
     world.materials.particlestars = new THREE.PointCloudMaterial({ color: 0x00ff00, blending: THREE.AdditiveBlending, transparent: true, size:1});
     
@@ -66,6 +56,7 @@ function materials(world, tick, callback) {
     ]);
 
 
+    // Glass wall texture
     // Vertex shader for glass
     var vShadeGlass =
     "void main(){" +
@@ -82,6 +73,49 @@ function materials(world, tick, callback) {
 
     world.materials.glassWall = new THREE.ShaderMaterial({vertexShader:   vShadeGlass, fragmentShader: fShadeGlass, transparent: true });
 
+
+     var fShadeStars = (function () {/*
+      precision mediump float;
+      varying highp vec2 transformed_position;
+      highp float rand(vec2 co) {
+      highp float a = 1e3;
+      highp float b = 1e-3;
+      highp float c = 1e5;
+      return fract(sin((co.x+co.y*a)*b)*c);
+      }
+
+      void main(void) {
+      float size = 15.0;
+      float prob = 0.97;
+      lowp vec3 background_color = vec3(0.09, 0.0, 0.288);
+      highp vec2 world_pos = transformed_position;
+      vec2 pos = floor(1.0 / size * world_pos);
+      float color = 0.0;
+      highp float starValue = rand(pos);
+      if(starValue > prob) {
+      vec2 center = size * pos + vec2(size, size) * 0.5;
+      float xy_dist = abs(world_pos.x - center.x) * abs(world_pos.y - center.y) / 5.0;
+      color = 0.6 - distance(world_pos, center) / (0.5 * size) * xy_dist;
+      }
+      if(starValue < prob || color < 0.0) {
+      gl_FragColor = vec4(background_color, 1.0);
+      } else {
+      float starIntensity = fract(100.0 * starValue);
+      gl_FragColor = vec4(background_color * (1.0 + color * 3.0 * starIntensity), 1.0);
+      }
+      }
+    */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+
+    // world.materials.stars = new THREE.ShaderMaterial({vertexShader:   vShadeGlass, fragmentShader: fShadeStars, transparent: true });
+
+    // Star material
+    world.materials.stars  = new THREE.MeshBasicMaterial();
+    world.materials.stars.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield.png');
+    world.materials.stars.side  = THREE.BackSide;
+
+    world.materials.starsAlpha  = new THREE.MeshBasicMaterial({ transparent: true});
+    world.materials.starsAlpha.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield_alpha.png');
+    world.materials.starsAlpha.side  = THREE.BackSide;
 
 
     // Return or next

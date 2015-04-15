@@ -246,7 +246,7 @@ function game(world, tick) {
         particlestars,
         jumpCubes,
         rotateCube,
-        //positionbar,
+        positionbar,
         //rutgerMod,
         shooter,
         movableBoxes,
