@@ -5,14 +5,16 @@
     "test"  : "test script here"
   },
   "middleWare":[
-    {"name" : "testMod", "path":"/Users/lschans/Projects/maxpane-engine/aas_modules/testMod"}
+    {"name" : "testMod", "path":"/Users/lschans/Projects/maxpane-engine/aas_modules/testMod"},
+    {"name" : "smartyReplace", "path":"/Users/lschans/Projects/maxpane-engine/aas_modules/smartyReplace"}
   ],
-  "default":"game.maxpane.nl",
+  "defaultDomain":"game.maxpane.nl",
   "AAS" :[
     {
       "domain":"www.maxpane.nl",
       "forceHTTPS"  : false,
       "index"       : "index.html",
+      "error"       : "error.html",
       "roots":{
         "authenticated": "/Users/lschans/Projects/maxpane-engine/webroot",
         "unauthenticated": "/Users/lschans/Projects/maxpane-engine/loginroot",
@@ -20,94 +22,94 @@
       },
       "modules" : {
         "GET":[
-          "worker.parseRequest.getGet",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.testMod.test",
-          "worker.serve.serveFile"
+          "parseRequest.getGet",
+          "cookies.parseCookies",
+          "session.initSession",
+          "clientInfo.getInfo",
+          "session.save",
+          "testMod.test",
+          "serve.serveFile"
         ],
         "POST":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ],
         "PUT":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ],
         "DELETE":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ],
         "OPTIONS":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ],
         "HEAD":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ],
         "TRACE":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ],
         "CONNECT":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ],
         "PATCH":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ],
         "UNDEFINED":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ]
       }
     },
@@ -115,28 +117,29 @@
       "domain":"game.maxpane.nl",
       "forceHTTPS"  : false,
       "index"       : "index.html",
+      "error"       : "error.html",
       "roots":{
         "authenticated": "/Users/lschans/Projects/maxpane-engine/engine",
         "unauthenticated": "/Users/lschans/Projects/maxpane-engine/loginroot",
         "common": "/Users/lschans/Projects/maxpane-engine/public"
       },
       "modules" : {
-        "GET":[
-          "worker.parseRequest.getGet",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
-        ],
+          "GET":[
+            "parseRequest.getGet",
+            "cookies.parseCookies",
+            "session.initSession",
+            "clientInfo.getInfo",
+            "session.save",
+            "serve.serveFile"
+          ],
         "UNDEFINED":[
-          "worker.parseRequest.getPost",
-          "worker.cookies.parseCookies",
-          "worker.session.initSession",
-          "worker.authenticate.authenticate",
-          "worker.clientInfo.getInfo",
-          "worker.session.save",
-          "worker.serve.serveFile"
+          "parseRequest.getPost",
+          "cookies.parseCookies",
+          "session.initSession",
+          "authenticate.authenticate",
+          "clientInfo.getInfo",
+          "session.save",
+          "serve.serveFile"
         ]
       }
   }]

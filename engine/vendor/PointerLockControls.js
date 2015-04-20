@@ -151,6 +151,7 @@
     var inputVelocity = new THREE.Vector3();
     var worldEdge = 1800;
     var oldDist = worldEdge;
+    var oldPos = cannonBody.position;
     var euler = new THREE.Euler();
 
 
@@ -167,30 +168,17 @@
             {x:world.player.sphereBody.position.x,y:world.player.sphereBody.position.y,z:world.player.sphereBody.position.z} // Player
         );
 
-        var averageVelocity = (Math.abs(velocity.x) + Math.abs(velocity.z) ) / 2;
+        var averageVelocity = Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.z, 2));
+
+        var distArea = worldEdge * 0.95;
 
         // Add a bumper around the world... Like an invisible rubber border you cannot pass
-        if(dist.distance >= worldEdge && averageVelocity > 0) {
-            oldDist = dist.distance;
-            if(oldDist >= dist.distance) {
-                // Invert controls if we are moving away further from the center
-                if (moveForward) {
-                    if(yawObject.position.z > 0 && velocity.z > 0) inputVelocity.z = -velocityFactor * delta;
-                    else inputVelocity.z = velocityFactor * delta;
-                }
-                if (moveBackward) {
-                    if(yawObject.position.z < 0&& velocity.z > 0) inputVelocity.z = velocityFactor * delta;
-                    else inputVelocity.z = -velocityFactor * delta;
-                }
-                if (moveLeft) {
-                    if(yawObject.position.x > 0&& velocity.x > 0) inputVelocity.x = -velocityFactor * delta;
-                    else inputVelocity.x = velocityFactor * delta;
-                }
-                if (moveRight) {
-                    if(yawObject.position.x < 0&& velocity.x > 0) inputVelocity.x = velocityFactor * delta;
-                    else inputVelocity.x = -velocityFactor * delta;
-                }
-            }
+        if(dist.distance > distArea && averageVelocity >= 0 && oldDist < dist.distance) {
+            if(cannonBody.position.z > oldPos.z) cannonBody.position.z -= Math.abs(velocity.z);
+            if(cannonBody.position.z < oldPos.z) cannonBody.position.z += Math.abs(velocity.z);
+
+            if(cannonBody.position.x > oldPos.x) cannonBody.position.x -= Math.abs(velocity.x);
+            if(cannonBody.position.x < oldPos.x) cannonBody.position.x += Math.abs(velocity.x);
         } else {
             if (moveForward) {
                 inputVelocity.z = -velocityFactor * delta;
@@ -205,6 +193,8 @@
                 inputVelocity.x = velocityFactor * delta;
             }
         }
+        oldPos = cannonBody.position;
+        oldDist = dist.distance;
 
         // Convert velocity to world coordinates
         euler.x = pitchObject.rotation.x;
@@ -212,7 +202,6 @@
         euler.order = "XYZ";
         quat.setFromEuler(euler);
         inputVelocity.applyQuaternion(quat);
-        //quat.multiplyVector3(inputVelocity);
 
         // Add to the object
         velocity.x += inputVelocity.x;
@@ -232,5 +221,7 @@
         cannonBody.rotation.x = 0 - (yawObject.rotation.x * 100);
         cannonBody.rotation.y = 0 - (yawObject.rotation.y * 100);
         cannonBody.rotation.z = 0 - (yawObject.rotation.z * 100);
+        cannonBody.velocity.avg = averageVelocity;
+
     };
 };

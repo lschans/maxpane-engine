@@ -14,7 +14,6 @@ function maxpaneControls(world, tick, callback) {
             world.physWorld.step(world.dt);
             world.controls.update( Date.now() - time );
         }
-
     });
 
     // Return or next

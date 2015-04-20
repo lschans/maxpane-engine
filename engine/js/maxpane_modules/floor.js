@@ -11,7 +11,7 @@ function floor(world, tick, callback) {
     // CircleGeometry(radius, segments, thetaStart, thetaLength)
     world.floor.layerTop.geometry = new THREE.CircleGeometry( 1820, 50);
     world.floor.layerTop.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
-    world.floor.layerTop.mesh = new THREE.Mesh( world.floor.layerTop.geometry, world.materials.greenFloorThin );
+    world.floor.layerTop.mesh = new THREE.Mesh( world.floor.layerTop.geometry, world.materials.soil );
 
     // Top layer of the floor, the one that is solid black
     //world.floor.layerBottom.geometry = new THREE.PlaneBufferGeometry( 4300, 4300, 1, 1 );

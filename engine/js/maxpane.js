@@ -164,7 +164,6 @@ function worldInit(){
 }
 
 
-
 var stats = new Stats();
 
 function maxpaneStats() {
@@ -256,5 +255,19 @@ function game(world, tick) {
     ];
     syncIt (world, tick, devgame);
     maxpaneStats();
+}
+
+var mpEdit = {};
+
+mpEdit.add = function (mpObject) {
+    world.physWorld.add(mpObject.body);
+    world.scene.add(mpObject.mesh);
+}
+
+mpEdit.getMaterials = function () {
+    var keys = [];
+    for(var k in maxpaneWorld.materials) keys.push(k);
+
+    return keys;
 }
 

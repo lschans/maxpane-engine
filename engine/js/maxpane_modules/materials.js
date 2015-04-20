@@ -109,6 +109,10 @@ function materials(world, tick, callback) {
     // world.materials.stars = new THREE.ShaderMaterial({vertexShader:   vShadeGlass, fragmentShader: fShadeStars, transparent: true });
 
     // Star material
+    world.materials.soil  = new THREE.MeshBasicMaterial({ transparent: false});
+    world.materials.soil.map   = THREE.ImageUtils.loadTexture('images/soil.png');
+
+    // Star material
     world.materials.stars  = new THREE.MeshBasicMaterial();
     world.materials.stars.map   = THREE.ImageUtils.loadTexture('images/galaxy_starfield.png');
     world.materials.stars.side  = THREE.BackSide;

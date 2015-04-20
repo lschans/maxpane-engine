@@ -26,6 +26,15 @@ MP.add.sphere = function(world, tick, sphereObject) {
     ballBody.position.set(sphereObject.x, sphereObject.y, sphereObject.z);
     ballMesh.position.copy(ballBody.position);
 
+    if(sphereObject.nonPhysMovement === true && sphereObject.hasPhys === true) {
+        // Add rotation function to body to make life a bit less hard
+        ballBody.rotation = MP.add.addRotation(ballBody, ballMesh);
+        tick.push(function (world) {
+            // Update box w.o. physics
+            ballBody.rotation.update();
+        });
+    }
+    
     if(sphereObject.update === true) {
         tick.push(function (world) {
             // Update sphere positions

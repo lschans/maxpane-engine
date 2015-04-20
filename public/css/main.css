@@ -485,6 +485,30 @@ ol li a:hover {
     border-radius: 5px;
     border: 1px solid #0f0;
     padding: 1px;
+    display: inline-block;
+    float: left;
+}
+
+.editorControls {
+    font-family: monospace;
+    display: inline-block;
+    float: right;
+    width: 275px;
+}
+
+.editorControls form input {
+    font-family: monospace;
+    font-size: 13px;
+    margin: 0px;
+}
+
+.editorControls form table {
+    line-height: 12px;
+}
+
+.editorControls form table td {
+    line-height: 12px;
+    padding: 0px;
 }
 
 #blocker {
