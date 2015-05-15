@@ -3,10 +3,15 @@
  * @author schteppe / https://github.com/schteppe
  * @author lschans / https://github.com/lschans
  */
- var PointerLockControls = function (world) {
+ var PointerLockControls = function (world, mode) {
 
-    var camera = world.camera;
-    var cannonBody = world.player.sphereBody;
+    if(mode.view == 1) {
+        var camera = world.camera;
+        var cannonBody = world.player.body.sphereBody;
+    } else if(mode.view == 2) {
+        var camera = mode.view.camera;
+        var cannonBody = mode.view.controls;
+    }
 
     var velocityFactor = 4;
     var jumpVelocity = 300;
@@ -145,7 +150,7 @@
     this.getDirection = function(targetVec){
         targetVec.set(0,0,-1);
         quat.multiplyVector3(targetVec);
-    }
+    };
 
     // Moves the camera to the Cannon.js object position and adds velocity to the object if the run key is down
     var inputVelocity = new THREE.Vector3();
@@ -165,7 +170,7 @@
         // Detect world boundry and stop movement
         var dist = MP.collision.distance(
             {x:0,y:0,z:0}, // World
-            {x:world.player.sphereBody.position.x,y:world.player.sphereBody.position.y,z:world.player.sphereBody.position.z} // Player
+            {x:world.player.body.sphereBody.position.x,y:world.player.body.sphereBody.position.y,z:world.player.body.sphereBody.position.z} // Player
         );
 
         var averageVelocity = Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.z, 2));
@@ -222,6 +227,5 @@
         cannonBody.rotation.y = 0 - (yawObject.rotation.y * 100);
         cannonBody.rotation.z = 0 - (yawObject.rotation.z * 100);
         cannonBody.velocity.avg = averageVelocity;
-
     };
 };

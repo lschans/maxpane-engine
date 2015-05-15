@@ -4,10 +4,8 @@ function onWindowResize() {
     world.renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
-window.addEventListener( 'resize', onWindowResize, true );
-
 window.onload = function () {
-    worldInit();
-    onWindowResize();
-    game(world, tick);
+    loadWorld({url:'/worlds/devworld.json'});
+    window.addEventListener( 'resize', onWindowResize, true );
+
 };

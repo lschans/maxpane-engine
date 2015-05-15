@@ -1,0 +1,39 @@
+{
+  "camera" : {
+    "fov" : 75,
+    "width" : 960,
+    "height" : 540,
+    "near" : 2,
+    "far" : 2500
+  },
+  "gravity": {
+    "x": 0,
+    "y": -9.8,
+    "z": 0
+  },
+  "gravityMultiplier": {
+    "x": 0,
+    "y": 50,
+    "z": 0
+  },
+  "sequence": [
+    "materials",
+    "audio",
+    "bgMusic",
+    "//character",
+    "pointerLock",
+    "maxpaneControls",
+    "floor",
+    "surrounding",
+    "particlestars",
+    "jumpCubes",
+    "rotateCube",
+    "positionbar",
+    "//rutgerMod",
+    "shooter",
+    "movableBoxes",
+    "stitchedPlanks",
+    "soundMachine",
+    "maxpaneRender"
+    ]
+}

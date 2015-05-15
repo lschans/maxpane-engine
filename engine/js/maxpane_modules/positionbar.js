@@ -14,19 +14,19 @@ function positionbar(world, tick, callback) {
     //document.body.insertBefore(world.devpositionbar, document.body.firstChild);
 
     tick.push(function(world){
-        var dist = MP.collision.distance({x:0,y:0,z:0}, {x:world.player.sphereBody.position.x,y:world.player.sphereBody.position.y,z:world.player.sphereBody.position.z});
+        var dist = MP.collision.distance({x:0,y:0,z:0}, {x:world.player.body.sphereBody.position.x,y:world.player.body.sphereBody.position.y,z:world.player.body.sphereBody.position.z});
 
         world.devpositionbar.innerHTML =
-            'Position ( x: ' + Math.round(world.player.sphereBody.position.x) +
-            ' y: ' + Math.round(world.player.sphereBody.position.y) +
-            ' z: ' + Math.round(world.player.sphereBody.position.z) +
-            ') Rotation ( x: ' + Math.round(world.player.sphereBody.rotation.x) +
-            ' y: ' + Math.round(world.player.sphereBody.rotation.y) +
-            ' z: ' + Math.round(world.player.sphereBody.rotation.z) +
-            ') Velocity ( average: ' + Math.round(world.player.sphereBody.velocity.avg) +
-            ' x: ' + Math.round(world.player.sphereBody.velocity.x) +
-            ' y: ' + Math.round(world.player.sphereBody.velocity.y) +
-            ' z: ' + Math.round(world.player.sphereBody.velocity.z) +
+            'Position ( x: ' + Math.round(world.player.body.sphereBody.position.x) +
+            ' y: ' + Math.round(world.player.body.sphereBody.position.y) +
+            ' z: ' + Math.round(world.player.body.sphereBody.position.z) +
+            ') Rotation ( x: ' + Math.round(world.player.body.sphereBody.rotation.x) +
+            ' y: ' + Math.round(world.player.body.sphereBody.rotation.y) +
+            ' z: ' + Math.round(world.player.body.sphereBody.rotation.z) +
+            ') Velocity ( average: ' + Math.round(world.player.body.sphereBody.velocity.avg) +
+            ' x: ' + Math.round(world.player.body.sphereBody.velocity.x) +
+            ' y: ' + Math.round(world.player.body.sphereBody.velocity.y) +
+            ' z: ' + Math.round(world.player.body.sphereBody.velocity.z) +
             ') Distance ( total: ' + Math.round(dist.distance) +
             ' x: ' + Math.round(dist.x) +
             ' y: ' + Math.round(dist.y) +

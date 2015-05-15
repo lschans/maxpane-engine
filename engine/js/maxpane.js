@@ -5,39 +5,25 @@ var settings = {},
     maxpaneWorld,
     maxpaneTick;
 
+// Test if browser supports webworkers and use webworkers for world loading
+if(typeof(Worker) !== "undefined") {
+    if(typeof(worldLoader) == "undefined") {
+        worldLoader = new Worker("/js/maxpane_workers/maxpane.worker.world-loader.js");
+        worldLoader.onmessage = function(world){
+            console.log('World file received');
+            worldInit(world.data);
+        };
+    }
+} else {
+    MP.error('Browser doesn\'t support webworkers, game won\'t run properly');
+}
 
-
-// Populate settings
-settings.camera = {};
-settings.camera.fov = 75;
-settings.camera.width = 960;
-settings.camera.height = 540;
-settings.camera.near = 2;
-settings.camera.far = 2500;
-
-settings.gravityX = 0;
-settings.gravityY = -9.8 * 50; // Looks odd, but its a game.. and this feels 'real' for the level.
-settings.gravityZ = 0;
+var loadWorld = function (worldFile) {
+    worldLoader.postMessage(worldFile);
+};
 
 function empty(elem) {
     while (elem.lastChild) elem.removeChild(elem.lastChild);
-}
-
-function syncItter (world, tick){
-    // Function that iterates over a given array with callback functions
-    var myFunction = world.funcArray.shift();
-    if(world.funcArray.length > 0) {
-        if(typeof (myFunction) === 'function') myFunction(world, tick, syncItter);
-    } else {
-        delete world.funcArray;
-        myFunction(world, tick);
-    }
-}
-
-function syncIt (world, tick, functionArray) {
-    // Function that iterates over all callback functions in the function array
-    world.funcArray = functionArray;
-    syncItter(world, tick);
 }
 
 function worldClear(world) {
@@ -72,17 +58,18 @@ function worldClear(world) {
     maxpaneTick = null;
 }
 
-function worldInit(){
+function worldInit(worldData){
+    console.log(worldData);
     // Add camera
     world.objects = [];
     world.meshes = [];
     world.bodies = [];
 
     world.camera = new THREE.PerspectiveCamera(
-        settings.camera.fov,
-        settings.camera.width / settings.camera.height,
-        settings.camera.near,
-        settings.camera.far );
+        worldData.camera.fov,
+        worldData.camera.width / worldData.camera.height,
+        worldData.camera.near,
+        worldData.camera.far );
 
     world.camera.position.set(0, 20, 0);
 
@@ -107,8 +94,6 @@ function worldInit(){
         world.physWorld.solver = world.solver;
     }
 
-    var physMaterials = {};
-
     // Create a slippery material (friction coefficient = 0.0)
     var slipperyMaterial = new CANNON.Material("slipperyMaterial");
     var slipperyContactMaterial = new CANNON.ContactMaterial(
@@ -121,23 +106,24 @@ function worldInit(){
     // We must add the contact materials to the world
     world.physWorld.addContactMaterial(slipperyContactMaterial);
 
-    world.physWorld.gravity.set(settings.gravityX,settings.gravityY,settings.gravityZ);
+    world.physWorld.gravity.set(
+        worldData.gravity.x * worldData.gravityMultiplier.x,
+        worldData.gravity.y * worldData.gravityMultiplier.y,
+        worldData.gravity.z * worldData.gravityMultiplier.z);
+
     world.physWorld.broadphase = new CANNON.NaiveBroadphase();
 
     // Create a sphere to simulate the player physics
-    world.player = {};
-    world.player.mass = 5;
-    world.player.radius = 5;
-    world.player.sphereShape = new CANNON.Sphere(world.player.radius);
-    world.player.sphereBody = new CANNON.Body({ mass: world.player.mass });
-    world.player.sphereBody.addShape(world.player.sphereShape);
-    world.player.sphereBody.position.set(0,20,0);
-    world.player.sphereBody.rotation = {
-        x:0.0,
-        y:0.0,
-        z:0.0};
-    world.player.sphereBody.linearDamping = 0.9;
-    world.physWorld.add(world.player.sphereBody);
+    world.player = MP.player({
+        mass:5,
+        radius:5,
+        shape:"sphere",
+        position:{x:0,y:20,z:0},
+        rotation:{x:0,y:0,z:0},
+        linearDamping:0.9
+    });
+
+    world.physWorld.add(world.player.body.sphereBody);
 
     // Add scene
     world.scene = new THREE.Scene();
@@ -161,6 +147,10 @@ function worldInit(){
 
     // World velocity is probably outdated since we have physics
     world.velocity = new THREE.Vector3();
+
+    onWindowResize();
+
+    game(world, tick);
 }
 
 
@@ -253,7 +243,7 @@ function game(world, tick) {
         soundMachine,
         maxpaneRender
     ];
-    syncIt (world, tick, devgame);
+    MP.sequence.syncIt (world, tick, devgame);
     maxpaneStats();
 }
 
@@ -262,12 +252,11 @@ var mpEdit = {};
 mpEdit.add = function (mpObject) {
     world.physWorld.add(mpObject.body);
     world.scene.add(mpObject.mesh);
-}
+};
 
 mpEdit.getMaterials = function () {
     var keys = [];
     for(var k in maxpaneWorld.materials) keys.push(k);
 
     return keys;
-}
-
+};

@@ -12,7 +12,7 @@ function shooter(world, tick, callback) {
     world.shooter.getShootDir = function(targetVec, world){
         targetVec.set(0,0,1);
         targetVec.unproject(world.camera);
-        var ray = new THREE.Ray(world.player.sphereBody.position, targetVec.sub(world.player.sphereBody.position).normalize());
+        var ray = new THREE.Ray(world.player.body.sphereBody.position, targetVec.sub(world.player.body.sphereBody.position).normalize());
         targetVec.copy(ray.direction);
         return targetVec;
     };
@@ -45,9 +45,9 @@ function shooter(world, tick, callback) {
                 shootDirection.z * world.shooter.shootVelo);
 
             // Move the ball outside the player sphere
-            var x = world.player.sphereBody.position.x + (shootDirection.x * (world.player.sphereShape.radius*1.02 + world.shooter.ballShape.radius));
-            var y = world.player.sphereBody.position.y + (shootDirection.y * (world.player.sphereShape.radius*1.02 + world.shooter.ballShape.radius));
-            var z = world.player.sphereBody.position.z + (shootDirection.z * (world.player.sphereShape.radius*1.02 + world.shooter.ballShape.radius));
+            var x = world.player.body.sphereBody.position.x + (shootDirection.x * (world.player.body.sphereShape.radius*1.02 + world.shooter.ballShape.radius));
+            var y = world.player.body.sphereBody.position.y + (shootDirection.y * (world.player.body.sphereShape.radius*1.02 + world.shooter.ballShape.radius));
+            var z = world.player.body.sphereBody.position.z + (shootDirection.z * (world.player.body.sphereShape.radius*1.02 + world.shooter.ballShape.radius));
             ballBody.position.set(x,y,z);
             ballMesh.position.set(x,y,z);
         }

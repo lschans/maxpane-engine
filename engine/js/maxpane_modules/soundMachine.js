@@ -77,10 +77,10 @@ function soundMachine(world, tick, callback) {
 
     tick.push(function(world){
         // Get distance to sound object
-        var objDistX = world.soundMachine.machineCone.mesh.position.x - world.player.sphereBody.position.x;
+        var objDistX = world.soundMachine.machineCone.mesh.position.x - world.player.body.sphereBody.position.x;
         if(objDistX < 0) objDistX = 0 - objDistX;
 
-        var objDistZ = world.soundMachine.machineCone.mesh.position.z - world.player.sphereBody.position.z;
+        var objDistZ = world.soundMachine.machineCone.mesh.position.z - world.player.body.sphereBody.position.z;
         if(objDistZ < 0) objDistZ = 0 - objDistZ;
 
         // Get average of distance
@@ -89,10 +89,10 @@ function soundMachine(world, tick, callback) {
         // If average object distance is < 100 we are in range
         if(objDistAvg < 100) {
             // Pitch on jump
-            world.soundMachine.binauralSrc.setPitch(parseFloat(world.soundMachine.defaultPitch + world.player.sphereBody.velocity.y));
+            world.soundMachine.binauralSrc.setPitch(parseFloat(world.soundMachine.defaultPitch + world.player.body.sphereBody.velocity.y));
 
             // Do funcky beatrate stuff
-            world.soundMachine.binauralSrc.setBeatRate(parseFloat(world.soundMachine.defaultBeatRate + (world.player.sphereBody.rotation.y / 200)));
+            world.soundMachine.binauralSrc.setBeatRate(parseFloat(world.soundMachine.defaultBeatRate + (world.player.body.sphereBody.rotation.y / 200)));
 
             // Set sound gain according to distance
             var gain = (100 - objDistAvg) / 100;

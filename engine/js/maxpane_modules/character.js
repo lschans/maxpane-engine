@@ -71,9 +71,7 @@ function character(world, tick, callback) {
     world.meshes.push(world.character.bodyConeOuter.mesh);
 
     // Change the controls over to character, this way we rely on control but non intrusive
-    world.controls = new PointerLockControls(world.camera, world.character.bodyInner.mesh);
-
-
+    world.controls = new PointerLockControls(world, {view:2, camera:world.camera, controls:world.character.bodyInner.mesh});
 
     tick.push(function(world) {
 
