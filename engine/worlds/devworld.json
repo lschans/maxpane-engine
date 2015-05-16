@@ -4,23 +4,71 @@
     "width" : 960,
     "height" : 540,
     "near" : 2,
-    "far" : 2500
+    "far" : 2500,
+    "position" : {
+      "x":0,
+      "y":20,
+      "z":0
+    }
   },
-  "gravity": {
-    "x": 0,
-    "y": -9.8,
-    "z": 0
-  },
-  "gravityMultiplier": {
-    "x": 0,
-    "y": 50,
-    "z": 0
+  "world":{
+    "renderer":{
+      "antialias":true,
+      "shadowMapEnabled":false,
+      "shadowMapSoft":false,
+      "clearColor":"0x000000",
+      "size":{
+        "width":960,
+        "height":540
+      }
+    },
+    "physWorld":{
+      "quatNormalizeSkip":0,
+      "quatNormalizeFast":false,
+      "defaultContactMaterial": {
+        "contactEquationStiffness": 1e9,
+        "contactEquationRelaxation": 5,
+        "friction":0.0,
+        "restitution":0.1
+      },
+      "gravity": {
+        "x": -9.8,
+        "y": -9.8,
+        "z": -9.8
+      },
+      "gravityMultiplier": {
+        "x": 0,
+        "y": 50,
+        "z": 0
+      },
+      "split":true,
+      "solver":{
+        "iterations":25,
+        "tolerance":0.001
+      },
+      "player":{
+        "mass":5,
+        "radius":5,
+        "shape":"sphere",
+        "position":{
+          "x":0,
+          "y":20,
+          "z":0
+        },
+        "rotation":{
+          "x":0,
+          "y":0,
+          "z":0
+        },
+        "linearDamping":0.9
+      }
+    }
   },
   "sequence": [
     "materials",
     "audio",
     "bgMusic",
-    "//character",
+    "*character",
     "pointerLock",
     "maxpaneControls",
     "floor",
@@ -29,7 +77,7 @@
     "jumpCubes",
     "rotateCube",
     "positionbar",
-    "//rutgerMod",
+    "*rutgerMod",
     "shooter",
     "movableBoxes",
     "stitchedPlanks",

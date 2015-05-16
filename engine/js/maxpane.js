@@ -71,22 +71,25 @@ function worldInit(worldData){
         worldData.camera.near,
         worldData.camera.far );
 
-    world.camera.position.set(0, 20, 0);
+    world.camera.position.set(
+        worldData.camera.position.x,
+        worldData.camera.position.y,
+        worldData.camera.position.z);
 
     // Create virtual physics world
     world.physWorld = new CANNON.World();
-    world.physWorld.quatNormalizeSkip = 0;
-    world.physWorld.quatNormalizeFast = false;
+    world.physWorld.quatNormalizeSkip = worldData.world.physWorld.quatNormalizeSkip;
+    world.physWorld.quatNormalizeFast = worldData.world.physWorld.quatNormalizeFast;
 
     world.solver = new CANNON.GSSolver();
 
-    world.physWorld.defaultContactMaterial.contactEquationStiffness = 1e9;
-    world.physWorld.defaultContactMaterial.contactEquationRelaxation = 5;
+    world.physWorld.defaultContactMaterial.contactEquationStiffness = worldData.world.physWorld.defaultContactMaterial.contactEquationStiffness;
+    world.physWorld.defaultContactMaterial.contactEquationRelaxation = worldData.world.physWorld.defaultContactMaterial.contactEquationRelaxation;
 
-    world.solver.iterations = 25;
-    world.solver.tolerance = 0.001;
+    world.solver.iterations = worldData.world.physWorld.solver.iterations;
+    world.solver.tolerance = worldData.world.physWorld.solver.tolerance;
 
-    world.split = true;
+    world.split = worldData.split;
 
     if(world.split) {
         world.physWorld.solver = new CANNON.SplitSolver(world.solver);
@@ -99,28 +102,36 @@ function worldInit(worldData){
     var slipperyContactMaterial = new CANNON.ContactMaterial(
         slipperyMaterial,
         slipperyMaterial,
-        0.0, // friction coefficient
-        0.1  // restitution
+        worldData.world.physWorld.defaultContactMaterial.friction, // friction coefficient
+        worldData.world.physWorld.defaultContactMaterial.restitution  // restitution
     );
     
     // We must add the contact materials to the world
     world.physWorld.addContactMaterial(slipperyContactMaterial);
 
     world.physWorld.gravity.set(
-        worldData.gravity.x * worldData.gravityMultiplier.x,
-        worldData.gravity.y * worldData.gravityMultiplier.y,
-        worldData.gravity.z * worldData.gravityMultiplier.z);
+        worldData.world.physWorld.gravity.x * worldData.world.physWorld.gravityMultiplier.x,
+        worldData.world.physWorld.gravity.y * worldData.world.physWorld.gravityMultiplier.y,
+        worldData.world.physWorld.gravity.z * worldData.world.physWorld.gravityMultiplier.z);
 
     world.physWorld.broadphase = new CANNON.NaiveBroadphase();
 
     // Create a sphere to simulate the player physics
     world.player = MP.player({
-        mass:5,
-        radius:5,
-        shape:"sphere",
-        position:{x:0,y:20,z:0},
-        rotation:{x:0,y:0,z:0},
-        linearDamping:0.9
+        mass: worldData.world.physWorld.player.mass,
+        radius: worldData.world.physWorld.player.radius,
+        shape: worldData.world.physWorld.player.shape,
+        position:{
+            x: worldData.world.physWorld.player.position.x,
+            y: worldData.world.physWorld.player.position.y,
+            z: worldData.world.physWorld.player.position.z
+        },
+        rotation:{
+            x: worldData.world.physWorld.player.rotation.x,
+            y: worldData.world.physWorld.player.rotation.y,
+            z: worldData.world.physWorld.player.rotation.z
+        },
+        linearDamping: worldData.world.physWorld.player.linearDamping
     });
 
     world.physWorld.add(world.player.body.sphereBody);
@@ -131,15 +142,14 @@ function worldInit(worldData){
     // Add renderer
     world.renderer = new THREE.WebGLRenderer({canvas: mpGameCanvas});
 
-    // Fallback renderer for clients without webGL.. 8fps.. so not really an option
-    //world.renderer = new THREE.CanvasRenderer();
-
-    world.renderer.antialias = true; // True looks pretty but makes the gpu explode, so turns off at to much load
-    world.renderer.shadowMapEnabled = false;
-    world.renderer.shadowMapSoft = false;
-    world.renderer.setClearColor( 0x000000 );
+    world.renderer.antialias = worldData.world.renderer.antialias;
+    world.renderer.shadowMapEnabled = worldData.world.renderer.shadowMapEnabled;
+    world.renderer.shadowMapSoft = worldData.world.renderer.shadowMapSoft;
+    world.renderer.setClearColor( parseInt(worldData.world.renderer.clearColor, 16) );
     world.renderer.setPixelRatio( window.devicePixelRatio );
-    world.renderer.setSize( 960, 540 );
+    world.renderer.setSize(
+        worldData.world.renderer.size.width,
+        worldData.world.renderer.size.height);
 
     world.loader = new THREE.JSONLoader(); // init the loader util
 
@@ -150,9 +160,8 @@ function worldInit(worldData){
 
     onWindowResize();
 
-    game(world, tick);
+    game(world, tick, worldData);
 }
-
 
 var stats = new Stats();
 
@@ -220,30 +229,17 @@ function gameResume() {
     return true;
 }
 
-
-
-function game(world, tick) {
-    var devgame = [
-        materials,
-        audio,
-        bgMusic,
-        //character,
-        pointerLock,
-        maxpaneControls,
-        floor,
-        surrounding,
-        particlestars,
-        jumpCubes,
-        rotateCube,
-        positionbar,
-        //rutgerMod,
-        shooter,
-        movableBoxes,
-        stitchedPlanks,
-        soundMachine,
-        maxpaneRender
-    ];
-    MP.sequence.syncIt (world, tick, devgame);
+function game(world, tick, worldData) {
+    // Add sequence functions from JSON
+    // Disabled functions are prefixed with a *
+    var tickFunctions = [];
+    worldData.sequence.map(function(step){
+        if(step.charAt(0) != '*') {
+            tickFunctions.push(window[step]);
+            console.log('Added ' + step + ' to sequence.');
+        }
+    });
+    MP.sequence.syncIt (world, tick, tickFunctions);
     maxpaneStats();
 }
 
