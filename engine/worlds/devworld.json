@@ -41,7 +41,7 @@
         "y": 50,
         "z": 0
       },
-      "split":true,
+      "splitSolver":true,
       "solver":{
         "iterations":25,
         "tolerance":0.001

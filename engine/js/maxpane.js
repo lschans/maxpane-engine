@@ -89,7 +89,7 @@ function worldInit(worldData){
     world.solver.iterations = worldData.world.physWorld.solver.iterations;
     world.solver.tolerance = worldData.world.physWorld.solver.tolerance;
 
-    world.split = worldData.split;
+    world.split = worldData.world.splitSolver;
 
     if(world.split) {
         world.physWorld.solver = new CANNON.SplitSolver(world.solver);
