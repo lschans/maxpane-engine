@@ -83,5 +83,6 @@
     "stitchedPlanks",
     "soundMachine",
     "maxpaneRender"
-    ]
+    ],
+  "materials":"/worlds/devworld_materials.json"
 }
