@@ -59,37 +59,39 @@ function worldClear(world) {
 }
 
 function worldInit(worldData){
-    console.log(worldData);
     // Add camera
     world.objects = [];
     world.meshes = [];
     world.bodies = [];
+    world.data = worldData;
+
+    delete worldData;
 
     world.camera = new THREE.PerspectiveCamera(
-        worldData.camera.fov,
-        worldData.camera.width / worldData.camera.height,
-        worldData.camera.near,
-        worldData.camera.far );
+        world.data.camera.fov,
+        world.data.camera.width / world.data.camera.height,
+        world.data.camera.near,
+        world.data.camera.far );
 
     world.camera.position.set(
-        worldData.camera.position.x,
-        worldData.camera.position.y,
-        worldData.camera.position.z);
+        world.data.camera.position.x,
+        world.data.camera.position.y,
+        world.data.camera.position.z);
 
     // Create virtual physics world
     world.physWorld = new CANNON.World();
-    world.physWorld.quatNormalizeSkip = worldData.world.physWorld.quatNormalizeSkip;
-    world.physWorld.quatNormalizeFast = worldData.world.physWorld.quatNormalizeFast;
+    world.physWorld.quatNormalizeSkip = world.data.world.physWorld.quatNormalizeSkip;
+    world.physWorld.quatNormalizeFast = world.data.world.physWorld.quatNormalizeFast;
 
     world.solver = new CANNON.GSSolver();
 
-    world.physWorld.defaultContactMaterial.contactEquationStiffness = worldData.world.physWorld.defaultContactMaterial.contactEquationStiffness;
-    world.physWorld.defaultContactMaterial.contactEquationRelaxation = worldData.world.physWorld.defaultContactMaterial.contactEquationRelaxation;
+    world.physWorld.defaultContactMaterial.contactEquationStiffness = world.data.world.physWorld.defaultContactMaterial.contactEquationStiffness;
+    world.physWorld.defaultContactMaterial.contactEquationRelaxation = world.data.world.physWorld.defaultContactMaterial.contactEquationRelaxation;
 
-    world.solver.iterations = worldData.world.physWorld.solver.iterations;
-    world.solver.tolerance = worldData.world.physWorld.solver.tolerance;
+    world.solver.iterations = world.data.world.physWorld.solver.iterations;
+    world.solver.tolerance = world.data.world.physWorld.solver.tolerance;
 
-    world.split = worldData.world.splitSolver;
+    world.split = world.data.world.splitSolver;
 
     if(world.split) {
         world.physWorld.solver = new CANNON.SplitSolver(world.solver);
@@ -102,36 +104,36 @@ function worldInit(worldData){
     var slipperyContactMaterial = new CANNON.ContactMaterial(
         slipperyMaterial,
         slipperyMaterial,
-        worldData.world.physWorld.defaultContactMaterial.friction, // friction coefficient
-        worldData.world.physWorld.defaultContactMaterial.restitution  // restitution
+        world.data.world.physWorld.defaultContactMaterial.friction, // friction coefficient
+        world.data.world.physWorld.defaultContactMaterial.restitution  // restitution
     );
     
     // We must add the contact materials to the world
     world.physWorld.addContactMaterial(slipperyContactMaterial);
 
     world.physWorld.gravity.set(
-        worldData.world.physWorld.gravity.x * worldData.world.physWorld.gravityMultiplier.x,
-        worldData.world.physWorld.gravity.y * worldData.world.physWorld.gravityMultiplier.y,
-        worldData.world.physWorld.gravity.z * worldData.world.physWorld.gravityMultiplier.z);
+        world.data.world.physWorld.gravity.x * world.data.world.physWorld.gravityMultiplier.x,
+        world.data.world.physWorld.gravity.y * world.data.world.physWorld.gravityMultiplier.y,
+        world.data.world.physWorld.gravity.z * world.data.world.physWorld.gravityMultiplier.z);
 
     world.physWorld.broadphase = new CANNON.NaiveBroadphase();
 
     // Create a sphere to simulate the player physics
     world.player = MP.player({
-        mass: worldData.world.physWorld.player.mass,
-        radius: worldData.world.physWorld.player.radius,
-        shape: worldData.world.physWorld.player.shape,
+        mass: world.data.world.physWorld.player.mass,
+        radius: world.data.world.physWorld.player.radius,
+        shape: world.data.world.physWorld.player.shape,
         position:{
-            x: worldData.world.physWorld.player.position.x,
-            y: worldData.world.physWorld.player.position.y,
-            z: worldData.world.physWorld.player.position.z
+            x: world.data.world.physWorld.player.position.x,
+            y: world.data.world.physWorld.player.position.y,
+            z: world.data.world.physWorld.player.position.z
         },
         rotation:{
-            x: worldData.world.physWorld.player.rotation.x,
-            y: worldData.world.physWorld.player.rotation.y,
-            z: worldData.world.physWorld.player.rotation.z
+            x: world.data.world.physWorld.player.rotation.x,
+            y: world.data.world.physWorld.player.rotation.y,
+            z: world.data.world.physWorld.player.rotation.z
         },
-        linearDamping: worldData.world.physWorld.player.linearDamping
+        linearDamping: world.data.world.physWorld.player.linearDamping
     });
 
     world.physWorld.add(world.player.body.sphereBody);
@@ -142,14 +144,14 @@ function worldInit(worldData){
     // Add renderer
     world.renderer = new THREE.WebGLRenderer({canvas: mpGameCanvas});
 
-    world.renderer.antialias = worldData.world.renderer.antialias;
-    world.renderer.shadowMapEnabled = worldData.world.renderer.shadowMapEnabled;
-    world.renderer.shadowMapSoft = worldData.world.renderer.shadowMapSoft;
-    world.renderer.setClearColor( parseInt(worldData.world.renderer.clearColor, 16) );
+    world.renderer.antialias = world.data.world.renderer.antialias;
+    world.renderer.shadowMapEnabled = world.data.world.renderer.shadowMapEnabled;
+    world.renderer.shadowMapSoft = world.data.world.renderer.shadowMapSoft;
+    world.renderer.setClearColor( parseInt(world.data.world.renderer.clearColor, 16) );
     world.renderer.setPixelRatio( window.devicePixelRatio );
     world.renderer.setSize(
-        worldData.world.renderer.size.width,
-        worldData.world.renderer.size.height);
+        world.data.world.renderer.size.width,
+        world.data.world.renderer.size.height);
 
     world.loader = new THREE.JSONLoader(); // init the loader util
 
@@ -160,7 +162,7 @@ function worldInit(worldData){
 
     onWindowResize();
 
-    game(world, tick, worldData);
+    game(world, tick);
 }
 
 var stats = new Stats();
@@ -229,11 +231,11 @@ function gameResume() {
     return true;
 }
 
-function game(world, tick, worldData) {
+function game(world, tick) {
     // Add sequence functions from JSON
     // Disabled functions are prefixed with a *
     var tickFunctions = [];
-    worldData.sequence.map(function(step){
+    world.data.sequence.map(function(step){
         if(step.charAt(0) != '*') {
             tickFunctions.push(window[step]);
             console.log('Added ' + step + ' to sequence.');
