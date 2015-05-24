@@ -552,5 +552,48 @@
         "vertexColors": false,
         "fog": true
       }
-    ]
+    ],
+    "MeshFaceMaterial": [
+      {
+        "name": "jumpCube",
+        "group": "complex",
+        "faces": [
+          "blueWireNormal",
+          "blueWireNormal",
+          "greenHalfSolid",
+          "blueWireNormal",
+          "blueWireNormal",
+          "blueWireNormal"
+        ],
+        "faceMaterials": []
+      }
+    ],
+  "MeshImageMaterial": [
+    {
+      "name": "soil",
+      "group": "image",
+      "baseType": "MeshBasicMaterial",
+      "transparent": false,
+      "image": "/images/soil.png",
+      "minFilter": "THREE.LinearFilter"
+    },
+    {
+      "name": "stars",
+      "group": "image",
+      "baseType": "MeshBasicMaterial",
+      "transparent": false,
+      "image": "/images/galaxy_starfield.png",
+      "minFilter": "THREE.LinearFilter",
+      "side":"THREE.BackSide"
+    },
+    {
+      "name": "starsAlpha",
+      "group": "image",
+      "baseType": "MeshBasicMaterial",
+      "transparent": true,
+      "image": "/images/galaxy_starfield_alpha.png",
+      "minFilter": "THREE.LinearFilter",
+      "side":"THREE.BackSide"
+    }
+  ]
 }

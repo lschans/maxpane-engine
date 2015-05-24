@@ -16,7 +16,7 @@ function floor(world, tick, callback) {
     // Top layer of the floor, the one that is solid black
     //world.floor.layerBottom.geometry = new THREE.PlaneBufferGeometry( 4300, 4300, 1, 1 );
     world.floor.layerBottom.geometry = new THREE.CircleGeometry( 1820, 50);
-        world.floor.layerBottom.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+    world.floor.layerBottom.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
     world.floor.layerBottom.mesh = new THREE.Mesh( world.floor.layerBottom.geometry, world.materials.blackSolid );
 
     // Place the solid floor a tiny bit under the normal floor

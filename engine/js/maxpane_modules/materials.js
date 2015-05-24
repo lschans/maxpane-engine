@@ -9,7 +9,7 @@ function materials(world, tick, callback) {
         if(typeof(material.color) !== 'undefined') material.color = parseInt(material.color, 16);
 
         world.materials[material.name] = new THREE.MeshBasicMaterial(material);
-        console.log("Added material: " + material.name);
+        console.log("Added MeshBasicMaterial: " + material.name);
     });
 
     world.data.materials.PointCloudMaterial.map(function(material){
@@ -18,18 +18,20 @@ function materials(world, tick, callback) {
         if(typeof(material.color) !== 'undefined') material.color = parseInt(material.color, 16);
 
         world.materials[material.name] = new THREE.PointCloudMaterial(material);
-        console.log("Added material: " + material.name);
+        console.log("Added PointCloudMaterial: " + material.name);
     });
 
-    // Jump cubes material, define all faces to have the top face solid
-    world.materials.jumpCube = new THREE.MeshFaceMaterial([
-        world.materials.blueWireNormal,
-        world.materials.blueWireNormal,
-        world.materials.greenHalfSolid,
-        world.materials.blueWireNormal,
-        world.materials.blueWireNormal,
-        world.materials.blueWireNormal
-    ]);
+    // Mesh face materials must be parsed as last, because they are created with previous defined materials
+    world.data.materials.MeshFaceMaterial.map(function(material) {
+        // Load materials to create face material
+        if (typeof(material.faces) !== 'undefined') {
+            material.faces.map(function (face) {
+                material.faceMaterials.push(world.materials[face]);
+                world.materials[material.name] = new THREE.MeshFaceMaterial(material.faceMaterials);
+            });
+            console.log("Added MeshFaceMaterial: " + material.name);
+        }
+    });
 
     // Glass wall texture
     // Vertex shader for glass
@@ -48,21 +50,20 @@ function materials(world, tick, callback) {
 
     world.materials.glassWall = new THREE.ShaderMaterial({vertexShader: vShadeGlass, fragmentShader: fShadeGlass, transparent: true });
 
-    // Soil material
-    world.materials.soil  = new THREE.MeshBasicMaterial({ transparent: false});
-    world.materials.soil.map = new MP.materials.imageloader({url:'images/soil.png'});
-    world.materials.soil.minFilter = THREE.LinearFilter;
+    // Mesh face materials must be parsed as last, because they are created with previous defined materials
+    world.data.materials.MeshImageMaterial.map(function(material) {
+        // Load materials to create face material
+        if (typeof(material.baseType) !== 'undefined' &&
+            typeof(material.image) !== 'undefined') {
 
-    // Star material
-    world.materials.stars  = new THREE.MeshBasicMaterial();
-    world.materials.stars.map   = new MP.materials.imageloader({url:'images/galaxy_starfield.png'});
-    world.materials.stars.minFilter = THREE.LinearFilter;
-    world.materials.stars.side  = THREE.BackSide;
+            world.materials[material.name]  = new THREE[material.baseType]({ transparent: (material.transparent || false)});
+            world.materials[material.name].map = new MP.materials.imageloader({url:material.image});
+            if (typeof(material.minFilter) !== 'undefined') world.materials[material.name].minFilter = THREE[material.minFilter.split('.')[1]];
+            if (typeof(material.side) !== 'undefined') world.materials[material.name].side  = THREE[material.side.split('.')[1]];
 
-    world.materials.starsAlpha  = new THREE.MeshBasicMaterial({ transparent: true});
-    world.materials.starsAlpha.map = new MP.materials.imageloader({url:'images/galaxy_starfield_alpha.png'});
-    world.materials.starsAlpha.minFilter = THREE.LinearFilter;
-    world.materials.starsAlpha.side  = THREE.BackSide;
+            console.log("Added MeshImageMaterial: " + material.name);
+        }
+    });
 
     // Return or next
     if(typeof(callback) === 'function') callback(world, tick);
