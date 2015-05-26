@@ -11,16 +11,8 @@ if(typeof(MP.body.teleport) !== 'function') {
             We do this in order to be able to move the subject to another destination.
             We do this because we are making a game which needs i.e teleport functionality.
          */
-        if(typeof(subject) == 'undefined'
-            || typeof(origin) == 'undefined'
-            || typeof(destination) == 'undefined'
-            || typeof(radius) == 'undefined'
-        ) {
-            return false;
-        } else {
-            if(subject.hitTest(origin, radius)){
-                subject.position.set(destination.x,destination.y,destination.z);
-            }
+        if(subject.hitTest(origin, radius)){
+            subject.position.set(destination.x, destination.y, destination.z);
         }
     };
 }

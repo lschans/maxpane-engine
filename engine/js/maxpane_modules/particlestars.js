@@ -1,6 +1,6 @@
 function particlestars(world, tick, callback) {
 
-    var starParicles = 1000;
+    var starParicles = 750;
     world.particlestars = {};
     world.particlestars.enabled = true;
     world.particlestars.slowCount = 0;
