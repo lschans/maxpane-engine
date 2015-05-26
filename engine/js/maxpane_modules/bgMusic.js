@@ -8,7 +8,7 @@ function bgMusic(world, tick, callback) {
     };
 
     // load a sound and play it immediatly
-    WebAudiox.loadBuffer(world.audio.context, 'music/marbles.ogg', function(buffer){
+    WebAudiox.loadBuffer(world.audio.context, world.data.bgMusic, function(buffer){
         var source	= world.audio.context.createBufferSource();
         source.buffer = buffer;
         source.loop	= true;

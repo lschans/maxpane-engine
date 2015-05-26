@@ -21,36 +21,6 @@ function materials(world, tick, callback) {
         console.log("Added PointCloudMaterial: " + material.name);
     });
 
-    // Mesh face materials must be parsed as last, because they are created with previous defined materials
-    world.data.materials.MeshFaceMaterial.map(function(material) {
-        // Load materials to create face material
-        if (typeof(material.faces) !== 'undefined') {
-            material.faces.map(function (face) {
-                material.faceMaterials.push(world.materials[face]);
-                world.materials[material.name] = new THREE.MeshFaceMaterial(material.faceMaterials);
-            });
-            console.log("Added MeshFaceMaterial: " + material.name);
-        }
-    });
-
-    // Glass wall texture
-    // Vertex shader for glass
-    var vShadeGlass =
-    "void main(){" +
-    "    gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);" +
-    "}";
-
-    // Fragment shader for glass
-    var fShadeGlass =
-    "uniform float DepthScale;" +
-    "void main(){" +
-    "float depth = (DepthScale * gl_FragCoord.z * 1.5) + 0.3;" +
-    "gl_FragColor = vec4(depth, depth, depth, 0.3);" +
-    "}";
-
-    world.materials.glassWall = new THREE.ShaderMaterial({vertexShader: vShadeGlass, fragmentShader: fShadeGlass, transparent: true });
-
-    // Mesh face materials must be parsed as last, because they are created with previous defined materials
     world.data.materials.MeshImageMaterial.map(function(material) {
         // Load materials to create face material
         if (typeof(material.baseType) !== 'undefined' &&
@@ -62,6 +32,24 @@ function materials(world, tick, callback) {
             if (typeof(material.side) !== 'undefined') world.materials[material.name].side  = THREE[material.side.split('.')[1]];
 
             console.log("Added MeshImageMaterial: " + material.name);
+        }
+    });
+
+    world.data.materials.ShaderMaterial.map(function(material) {
+        // Load Shaders
+        world.materials[material.name] = new THREE.ShaderMaterial(material);
+        console.log("Added ShaderMaterial: " + material.name);
+    });
+
+    // Mesh face materials must be parsed as last, because they are created with previous defined materials
+    world.data.materials.MeshFaceMaterial.map(function(material) {
+        // Load materials to create face material
+        if (typeof(material.faces) !== 'undefined') {
+            material.faces.map(function (face) {
+                material.faceMaterials.push(world.materials[face]);
+                world.materials[material.name] = new THREE.MeshFaceMaterial(material.faceMaterials);
+            });
+            console.log("Added MeshFaceMaterial: " + material.name);
         }
     });
 

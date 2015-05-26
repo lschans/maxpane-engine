@@ -71,8 +71,7 @@
     "*character",
     "pointerLock",
     "maxpaneControls",
-    "floor",
-    "surrounding",
+    "environment",
     "particlestars",
     "jumpCubes",
     "rotateCube",
@@ -84,5 +83,6 @@
     "soundMachine",
     "maxpaneRender"
     ],
-  "materials":"/worlds/devworld_materials.json"
+  "materials":"/worlds/devworld_materials.json",
+  "bgMusic":"/music/marbles.ogg"
 }
