@@ -17,5 +17,7 @@ MP.player = function(playerObject) {
         z:playerObject.rotation.z
     };
     player.body.sphereBody.linearDamping = playerObject.linearDamping;
+
+    player.body.sphereBody.hitTest = new MP.body.hitTest.test();
     return player;
 };

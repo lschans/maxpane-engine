@@ -41,7 +41,7 @@
         "y": 50,
         "z": 0
       },
-      "splitSolver":false,
+      "splitSolver":true,
       "solver":{
         "iterations":25,
         "tolerance":0.001
@@ -76,7 +76,7 @@
     "jumpCubes",
     "rotateCube",
     "positionbar",
-    "*rutgerMod",
+    "teleporter",
     "shooter",
     "movableBoxes",
     "stitchedPlanks",

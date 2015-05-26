@@ -26,6 +26,8 @@ MP.add.sphere = function(world, tick, sphereObject) {
     ballBody.position.set(sphereObject.x, sphereObject.y, sphereObject.z);
     ballMesh.position.copy(ballBody.position);
 
+    if(typeof(sphereObject.hitTest) != 'undefined') ballBody.hitTest = sphereObject.hitTest();
+
     if(sphereObject.nonPhysMovement === true && sphereObject.hasPhys === true) {
         // Add rotation function to body to make life a bit less hard
         ballBody.rotation = MP.add.addRotation(ballBody, ballMesh);

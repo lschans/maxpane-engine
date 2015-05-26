@@ -6,7 +6,7 @@ function environment(world, tick, callback) {
     world.environment.floor.layerBottom = {};
 
     // create the geometry sphere this is the.environment.sky you are in, this could be stars/clouds etc
-    world.environment.sky.sphere  = new THREE.SphereGeometry(2100, 25, 25);
+    world.environment.sky.sphere  = new THREE.SphereGeometry(2800, 25, 25);
     world.environment.sky.sphereAlpha  = new THREE.SphereGeometry(1800, 25, 25);
 
     // Create mesh with star material

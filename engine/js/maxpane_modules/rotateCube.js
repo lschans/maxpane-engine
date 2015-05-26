@@ -35,7 +35,7 @@ function rotateCube(world, tick, callback) {
         hasPhys:true
     });
 
-    var playBall = MP.add.sphere(world, tick, {
+    world.playBall = MP.add.sphere(world, tick, {
         radius:20,
         widthSegments:15,
         heightSegments:15,
@@ -47,7 +47,8 @@ function rotateCube(world, tick, callback) {
         damping:0.001,
         nonPhysMovement:true,
         hasPhys:true,
-        update:true
+        update:true,
+        hitTest:MP.body.hitTest.test
     });
 
     tick.push(function(world){
@@ -55,7 +56,7 @@ function rotateCube(world, tick, callback) {
         world.rotateCube.innerCube.mesh.rotation.y -= 0.02;
         world.rotateCube.outerCube.body.rotation.y += 0.01;
 
-        MP.collision.bumper.inside(playBall.body, {x:0,y:0,z:0}, 1800);
+        MP.collision.bumper.inside(world.playBall.body, {x:0,y:0,z:0}, 1800);
     });
 
     // Return or next

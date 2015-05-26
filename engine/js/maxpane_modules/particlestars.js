@@ -5,7 +5,7 @@ function particlestars(world, tick, callback) {
     world.particlestars.enabled = true;
     world.particlestars.slowCount = 0;
 
-    var randomPlacedParticle = function(starDistance) {
+    var randomPlacedParticle = function(spread, starDistance) {
         var x = -1 + Math.random() * 2;
         var y = -1 + Math.random() * 2;
         var z = -1 + Math.random() * 2;
@@ -14,11 +14,16 @@ function particlestars(world, tick, callback) {
         y *= d;
         z *= d;
 
-        var starParticle = new THREE.Vector3(
-            x * starDistance,
-            (Math.abs(y * starDistance)-250), // Make them appear only in the lower part of the top of the sphere
-            z * starDistance
-        );
+        if(x > 0) var xPos = starDistance + (x * spread);
+        else var xPos = (0 - starDistance) + (x * spread);
+
+        if(y > 0) var yPos = starDistance + (y * spread);
+        else var yPos = (0 - starDistance) + (y * spread);
+
+        if(z > 0) var zPos = starDistance + (z * spread);
+        else var zPos = (0 - starDistance) + (z * spread);
+
+        var starParticle = new THREE.Vector3( xPos, yPos, zPos );
 
         return starParticle;
     }
@@ -26,7 +31,7 @@ function particlestars(world, tick, callback) {
     // Starfield
     world.particlestars.stars = new THREE.Geometry();
     for (var i=0; i<starParicles; i++) {
-        world.particlestars.stars.vertices.push(randomPlacedParticle(1650));
+        world.particlestars.stars.vertices.push(randomPlacedParticle(1785, 0));
     }
 
     world.particlestars.particlesystem = new THREE.PointCloud(world.particlestars.stars, world.materials.particlestars);

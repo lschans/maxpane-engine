@@ -159,6 +159,12 @@
     var oldPos = cannonBody.position;
     var euler = new THREE.Euler();
 
+    this.setRotation = function(rotation) {
+        // Function sets yaw rotation relative to the mesh object
+        if(typeof(rotation.x) != 'undefined') yawObject.rotation.x = 0 - (rotation.x / 100);
+        if(typeof(rotation.y) != 'undefined') yawObject.rotation.y = 0 - (rotation.y / 100);
+        if(typeof(rotation.z) != 'undefined') yawObject.rotation.z = 0 - (rotation.z / 100);
+    }
 
     this.update = function ( delta ) {
 
