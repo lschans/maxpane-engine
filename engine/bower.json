@@ -21,6 +21,7 @@
     "threex.windowresize": "*",
     "threejs": "*",
     "three-controls": "*",
-    "webaudiox": "*"
+    "webaudiox": "*",
+    "cannon.js": "*"
   }
 }
