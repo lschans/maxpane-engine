@@ -4,7 +4,7 @@
     "width" : 960,
     "height" : 540,
     "near" : 2,
-    "far" : 2500,
+    "far" : 3600,
     "position" : {
       "x":0,
       "y":20,

@@ -31,7 +31,7 @@ function particlestars(world, tick, callback) {
     // Starfield
     world.particlestars.stars = new THREE.Geometry();
     for (var i=0; i<starParicles; i++) {
-        world.particlestars.stars.vertices.push(randomPlacedParticle(1785, 0));
+        world.particlestars.stars.vertices.push(randomPlacedParticle(1790, 0));
     }
 
     world.particlestars.particlesystem = new THREE.PointCloud(world.particlestars.stars, world.materials.particlestars);

@@ -5,19 +5,6 @@ var settings = {},
     maxpaneWorld,
     maxpaneTick;
 
-// Test if browser supports webworkers and use webworkers for world loading
-if(typeof(Worker) !== "undefined") {
-    if(typeof(worldLoader) == "undefined") {
-        worldLoader = new Worker("/js/maxpane_workers/maxpane.worker.world-loader.js");
-        worldLoader.onmessage = function(world){
-            console.log('World file received');
-            worldInit(world.data);
-        };
-    }
-} else {
-    MP.error('Browser doesn\'t support webworkers, game won\'t run properly');
-}
-
 var loadWorld = function (worldFile) {
     worldLoader.postMessage(worldFile);
 };
@@ -248,7 +235,7 @@ function game(world, tick) {
 var mpEdit = {};
 
 mpEdit.add = function (mpObject) {
-    world.physWorld.add(mpObject.body);
+    world.physWorld.addBody(mpObject.body);
     world.scene.add(mpObject.mesh);
 };
 

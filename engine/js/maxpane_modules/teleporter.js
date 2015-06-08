@@ -73,8 +73,8 @@ function teleporter(world, tick, callback) {
     // Exit z:-50, x:-250
 
     tick.push(function(world){
-        MP.body.teleport(world.player.body.sphereBody, {x:-250, y:5, z:-350}, {x:-250, y:5, z:-50}, 20);
-        MP.body.teleport(world.playBall.body, {x:-250, y:5, z:-350}, {x:-250, y:5, z:-50}, 20);
+        //MP.body.teleport(world.player.body.sphereBody, {x:-250, y:5, z:-350}, {x:-250, y:5, z:-50}, 20);
+        //MP.body.teleport(world.playBall.body, {x:-250, y:5, z:-350}, {x:-250, y:5, z:-50}, 20);
     });
 
     // Return or next

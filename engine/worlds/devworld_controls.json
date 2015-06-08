@@ -1,0 +1,18 @@
+{
+  "controls":[
+    {
+      "name":"move forward",
+      "keycodes":[38,87],
+      "type":"control",
+      "function":"forward"
+    }
+  ],
+  "fucntions":[
+    {
+      "name":"toggle sound",
+      "keycodes":[111,110],
+      "type":"function",
+      "function":"maxpane.sound.toggle"
+    }
+  ]
+}

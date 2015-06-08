@@ -547,10 +547,10 @@
         "opacity": 0.9,
         "blending":"THREE.AdditiveBlending",
         "map": null,
-        "size":1.0,
+        "size":2.0,
         "sizeAttenuation": true,
         "vertexColors": false,
-        "fog": true
+        "fog": false
       }
     ],
     "MeshFaceMaterial": [

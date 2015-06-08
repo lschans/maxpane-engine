@@ -40,10 +40,13 @@ onmessage = function(worldName) {
             // Load the materials and replace the url with object
             get(world.materials).then(JSON.parse).then(function(materials){
                 world.materials = materials;
-                postMessage(response);
+                postMessage({command:'worldData', world:response});
             });
         }, function(error) {
         console.error("Failed!", error);
         postMessage(error);
     });
 };
+
+// Tell the main process that we have loaded
+postMessage({command:'loaded'});
